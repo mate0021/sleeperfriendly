@@ -29,8 +29,10 @@ public class Timeline {
     }
 
     /**
-     * Returns alarm from timeline that is closest to, but greater than a given argument.
-     * If no such alarm is found, the first alarm from timeline is returned.
+     * Returns alarm from timeline that is closest to, but greater than a given argument and is
+     * enabled. If no such alarm is found, the first alarm from timeline is returned. If timeline
+     * is empty, return null.
+     *
      * @param currentTime
      * @return
      */
@@ -43,14 +45,27 @@ public class Timeline {
     }
 
     private Alarm getFirstGreaterThan(DateTime time) {
-        Alarm firstAlarm = line.iterator().next();
+        Alarm result = getFirstEnabledAlarm();
 
         for (Alarm a : line) {
-            if (a.isLaterThan(time)) {
-                return a;
+            if (a.isLaterThan(time) && a.isEnabled()) {
+                result = a;
+                break;
             }
         }
-        return firstAlarm;
+        return result;
+    }
+
+    private Alarm getFirstEnabledAlarm() {
+        Alarm result = null;
+        for (Alarm alarm : line) {
+            if (alarm.isEnabled()) {
+                result = alarm;
+                break;
+            }
+        }
+
+        return result;
     }
 
     /**

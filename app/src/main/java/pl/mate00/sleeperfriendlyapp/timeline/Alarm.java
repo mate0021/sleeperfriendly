@@ -9,10 +9,12 @@ public class Alarm implements Comparable<Alarm> {
 
     private int dayOfWeek;
     private Time time;
+    private boolean isEnabled;
 
     public Alarm(Time time, int dayOfWeek) {
         this.time = time;
         this.dayOfWeek = dayOfWeek;
+        isEnabled = true;
     }
 
     @Override
@@ -66,6 +68,14 @@ public class Alarm implements Comparable<Alarm> {
         } else {
             return false;
         }
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
     }
 }
 

@@ -34,6 +34,13 @@ public class TimelineTest {
     }
 
     @Test
+    public void getClosestAlarm_NoAlarmOnTimeline_ShouldReturnNull() {
+        Alarm result = subject.getClosestTo(anyDateTime());
+
+        Assert.assertNull(result);
+    }
+
+    @Test
     public void getClosestAlarm_OneAlarmOnTimeline() {
         Alarm a = anyAlarm();
         subject.addAlarm(a);
@@ -129,6 +136,42 @@ public class TimelineTest {
 
         Alarm expectedAfterRemoval = new Alarm(Time.from(8, 15), FRIDAY);
         Assert.assertEquals(expectedAfterRemoval, subject.getClosestTo(current));
+    }
+
+    @Test
+    public void getClosestAlarm_OneDisabledAlarm_ShouldReturnNull() {
+        Alarm a = anyAlarm();
+        a.setEnabled(false);
+
+        subject.addAlarm(a);
+
+        Assert.assertNull(subject.getClosestTo(anyDateTime()));
+    }
+
+    @Test
+    public void addOneDisabledAlarm_IsNotEmpty() {
+        Alarm a = anyAlarm();
+        a.setEnabled(false);
+
+        subject.addAlarm(a);
+
+        Assert.assertFalse(subject.isEmpty());
+    }
+
+    @Test
+    public void getClosestAlarm_ShouldReturnOnlyEnabledAlarm() {
+        Alarm disabledAlarm = new Alarm(Time.from(8, 0), MONDAY);
+        disabledAlarm.setEnabled(false);
+
+        Alarm enabledAlarm = new Alarm(Time.from(8, 0), WEDNESDAY);
+
+        subject.addAlarm(disabledAlarm);
+        subject.addAlarm(enabledAlarm);
+        DateTime current = new DateTime().withDayOfWeek(MONDAY).withTime(5, 0, 0, 0);
+
+        Alarm result = subject.getClosestTo(current);
+
+        Assert.assertEquals(enabledAlarm, result);
     }
 
     private Alarm anyAlarm() {
