@@ -75,4 +75,11 @@ public class Timeline {
     public void removeAlarm(Alarm alarm) {
         line.remove(alarm);
     }
+
+    @Override
+    public String toString() {
+        return "Timeline{" +
+                "line=" + line +
+                '}';
+    }
 }
