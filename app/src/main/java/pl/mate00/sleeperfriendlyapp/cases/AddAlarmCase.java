@@ -2,8 +2,12 @@ package pl.mate00.sleeperfriendlyapp.cases;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.TimerTask;
+import java.util.TreeSet;
 
 import static org.joda.time.DateTimeConstants.*;
 
@@ -17,25 +21,29 @@ import pl.mate00.sleeperfriendlyapp.timeline.Timeline;
 public class AddAlarmCase {
 
     private static Timeline timeline = new Timeline();
-    private static List<Alarm> uiAlarms = new
+    private static Set<RepeatableAlarm> uiAlarms = new HashSet<>();
+
     public static void main(String[] arg) {
-        Alarm[] alarmsFromUI = getAlarmsFromUi();
-        addAlarmsToTimeline(alarmsFromUI);
+        System.out.println(timeline);
+
+        RepeatableAlarm repeatableAlarm = getUiAlarm();
+        List<Alarm> alarms = repeatableAlarm.breakIntoPieces();
+        addAlarmsToTimeline(alarms);
 
         System.out.println(timeline);
 
         Alarm closest = getClosestAlarm();
+
         System.out.println(closest);
 
         addClosestToAlarmManager(closest);
-        updateUIListOfAlarms();
+
+        updateUIListOfAlarms(repeatableAlarm);
+
     }
 
-    private static void updateUIListOfAlarms(Alarm[] alarms) {
-
-        for (Alarm alarm : alarms) {
-            System.out.println();
-        }
+    private static void updateUIListOfAlarms(RepeatableAlarm alarm) {
+        uiAlarms.add(alarm);
     }
 
     private static void addClosestToAlarmManager(Alarm closest) {
@@ -47,7 +55,7 @@ public class AddAlarmCase {
         return timeline.getClosestTo(current);
     }
 
-    private static void addAlarmsToTimeline(Alarm[] alarms) {
+    private static void addAlarmsToTimeline(List<Alarm> alarms) {
         for (Alarm alarm : alarms) {
             System.out.println(alarm + " put to timeline.");
             timeline.addAlarm(alarm);
@@ -89,5 +97,31 @@ class RepeatableAlarm {
         this.time = time;
         this.days = days;
         isEnabled = true;
+    }
+
+    public List<Alarm> breakIntoPieces() {
+        List<Alarm> result = new ArrayList<>(days.length);
+        for (int day : days) {
+            result.add(new Alarm(time, day));
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RepeatableAlarm that = (RepeatableAlarm) o;
+
+        if (!time.equals(that.time)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return time.hashCode();
     }
 }
