@@ -22,7 +22,7 @@ public class RepeatableAlarm {
     }
 
     public List<Alarm> breakIntoPieces() {
-        List<Alarm> result = new ArrayList<>(days.length);
+        List<Alarm> result = new ArrayList<Alarm>(days.length);
         for (int day : days) {
             result.add(new Alarm(time, day));
         }

@@ -17,7 +17,7 @@ import pl.mate00.sleeperfriendlyapp.timeline.Timeline;
 public class AddAlarmCase {
 
     private static Timeline timeline = new Timeline();
-    private static Set<RepeatableAlarm> uiAlarms = new HashSet<>();
+    private static Set<RepeatableAlarm> uiAlarms = new HashSet<RepeatableAlarm>();
 
     public static void main(String[] arg) {
         System.out.println(timeline);

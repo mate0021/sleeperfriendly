@@ -17,7 +17,7 @@ import pl.mate00.sleeperfriendlyapp.timeline.Timeline;
 public class DisableRepeatableAlarm {
 
     private static Timeline timeline = new Timeline();
-    private static Set<RepeatableAlarm> uiAlarms = new HashSet<>();
+    private static Set<RepeatableAlarm> uiAlarms = new HashSet<RepeatableAlarm>();
 
     public static void main(String[] args) {
         DateTime current = new DateTime().withDayOfWeek(1).withTime(6, 0, 0, 0);

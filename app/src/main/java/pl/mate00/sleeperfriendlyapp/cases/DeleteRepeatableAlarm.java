@@ -15,7 +15,7 @@ import pl.mate00.sleeperfriendlyapp.timeline.Timeline;
 public class DeleteRepeatableAlarm {
 
     private static Timeline timeline = new Timeline();
-    private static Set<RepeatableAlarm> uiAlarms = new HashSet<>();
+    private static Set<RepeatableAlarm> uiAlarms = new HashSet<RepeatableAlarm>();
 
     public static void main(String[] args) {
         System.out.println(timeline);
