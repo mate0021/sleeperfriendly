@@ -53,11 +53,9 @@ public class AddAlarmCase {
 
     public static void addAlarmsToTimeline(List<Alarm> alarms) {
         for (Alarm alarm : alarms) {
-            System.out.println(alarm + " put to timeline.");
             timeline.addAlarm(alarm);
         }
     }
-
 
     public static RepeatableAlarm getAlarmFromUi() {
         RepeatableAlarm result = new RepeatableAlarm(Time.from(8, 15), new int[] {1, 2, 3, 4, 5});
