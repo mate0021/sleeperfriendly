@@ -8,13 +8,14 @@ import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Alarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Time;
 import pl.mate00.sleeperfriendlyapp.timeline.Timeline;
+import pl.mate00.sleeperfriendlyapp.timeline.TimelineConsole;
 
 /**
  * Created by mamy on 30.01.15.
  */
 public class DeleteRepeatableAlarm {
 
-    private static Timeline timeline = new Timeline();
+    private static Timeline timeline = new TimelineConsole();
     private static Set<RepeatableAlarm> uiAlarms = new HashSet<RepeatableAlarm>();
 
     public static void main(String[] args) {
