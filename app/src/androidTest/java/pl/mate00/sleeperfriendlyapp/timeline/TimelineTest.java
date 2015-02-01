@@ -17,7 +17,7 @@ public class TimelineTest {
 
     @Before
     public void setUp() throws Exception {
-        subject = new Timeline();
+        subject = new TimelineConsole();
     }
 
     @Test
