@@ -77,5 +77,13 @@ public class Alarm implements Comparable<Alarm> {
     public void setEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
     }
+
+    public int getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public Time getTime() {
+        return time;
+    }
 }
 

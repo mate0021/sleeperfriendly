@@ -20,6 +20,14 @@ public class Time implements Comparable<Time> {
         return new Time(hour, minute);
     }
 
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
