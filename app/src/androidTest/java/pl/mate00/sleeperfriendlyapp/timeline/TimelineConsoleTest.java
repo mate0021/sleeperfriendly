@@ -7,11 +7,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
+import java.util.Set;
 
 /**
  * Created by mamy on 15.01.15.
  */
-public class TimelineTest {
+public class TimelineConsoleTest {
 
     private Timeline subject;
 
@@ -172,6 +173,18 @@ public class TimelineTest {
         Alarm result = subject.getClosestTo(current);
 
         Assert.assertEquals(enabledAlarm, result);
+    }
+
+    @Test
+    public void getsAllAlarms() {
+        Alarm a1 = anyAlarm();
+        Alarm a2 = new Alarm(Time.from(3, 3), 1);
+        subject.addAlarm(a1);
+        subject.addAlarm(a2);
+
+        Set<Alarm> result = subject.getAllAlarms();
+
+        Assert.assertEquals(result.size(), 2);
     }
 
     private Alarm anyAlarm() {

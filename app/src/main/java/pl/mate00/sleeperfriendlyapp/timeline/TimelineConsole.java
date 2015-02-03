@@ -44,6 +44,19 @@ public class TimelineConsole implements Timeline {
         return line.size();
     }
 
+    /**
+     * Removes alarm from a timeline.
+     * @param alarm
+     */
+    public void removeAlarm(Alarm alarm) {
+        line.remove(alarm);
+    }
+
+
+    public Set<Alarm> getAllAlarms() {
+        return line;
+    }
+
     private Alarm getFirstGreaterThan(DateTime time) {
         Alarm result = getFirstEnabledAlarm();
 
@@ -66,14 +79,6 @@ public class TimelineConsole implements Timeline {
         }
 
         return result;
-    }
-
-    /**
-     * Removes alarm from a timeline.
-     * @param alarm
-     */
-    public void removeAlarm(Alarm alarm) {
-        line.remove(alarm);
     }
 
     @Override

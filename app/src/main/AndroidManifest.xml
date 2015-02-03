@@ -10,6 +10,7 @@
         <activity
             android:name=".ui.DbInsertActivity"
             android:label="@string/title_activity_db_insert" >
+
         </activity>
     </application>
 

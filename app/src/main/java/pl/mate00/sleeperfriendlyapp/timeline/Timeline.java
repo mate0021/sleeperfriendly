@@ -2,6 +2,8 @@ package pl.mate00.sleeperfriendlyapp.timeline;
 
 import org.joda.time.DateTime;
 
+import java.util.Set;
+
 /**
  * Created by mamy on 30.01.15.
  */
@@ -30,6 +32,12 @@ public interface Timeline {
      * @param alarm
      */
     void removeAlarm(Alarm alarm);
+
+    /**
+     * Returns a collection containing all defined alarms.
+     * @return
+     */
+    Set<Alarm> getAllAlarms();
 
     int getNumberOfAlarms();
 }
