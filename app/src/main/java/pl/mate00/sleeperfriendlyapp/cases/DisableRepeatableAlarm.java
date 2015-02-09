@@ -25,7 +25,7 @@ public class DisableRepeatableAlarm {
         System.out.println(timeline);
         System.out.println(uiAlarms);
 
-        RepeatableAlarm alarm = new RepeatableAlarm(Time.from(7, 0), new int[] {1, 2, 3});
+        RepeatableAlarm alarm = new RepeatableAlarm(Time.of(7, 0), new int[] {1, 2, 3});
         addAlarmsToTimeline(alarm.breakIntoPieces());
         updateUIListOfAlarms(alarm);
 

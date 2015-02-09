@@ -1,6 +1,5 @@
 package pl.mate00.sleeperfriendlyapp.ui;
 
-import android.nfc.Tag;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,7 +36,7 @@ public class DbInsertActivity extends ActionBarActivity {
             int hour = Integer.parseInt(txtHour.getText().toString());
             int min = Integer.parseInt(txtMinute.getText().toString());
 
-            timeline.addAlarm(new Alarm(Time.from(hour, min), day));
+            timeline.addAlarm(new Alarm(Time.of(hour, min), day));
             
             Log.d(TAG, txtDay.getText().toString());
         }

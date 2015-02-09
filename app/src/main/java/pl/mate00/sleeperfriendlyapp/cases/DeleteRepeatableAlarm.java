@@ -22,8 +22,8 @@ public class DeleteRepeatableAlarm {
         System.out.println(timeline);
         System.out.println(uiAlarms);
 
-        RepeatableAlarm a1 = new RepeatableAlarm(Time.from(6, 45), new int[] {1, 2, 3});
-        RepeatableAlarm a2 = new RepeatableAlarm(Time.from(7, 45), new int[] {1, 2, 3});
+        RepeatableAlarm a1 = new RepeatableAlarm(Time.of(6, 45), new int[] {1, 2, 3});
+        RepeatableAlarm a2 = new RepeatableAlarm(Time.of(7, 45), new int[] {1, 2, 3});
 
         addAlarmsToTimeline(a1.breakIntoPieces());
         addAlarmsToTimeline(a2.breakIntoPieces());

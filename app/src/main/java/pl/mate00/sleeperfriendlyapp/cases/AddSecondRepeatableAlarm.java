@@ -26,8 +26,8 @@ public class AddSecondRepeatableAlarm {
 
         System.out.println(timeline);
 
-        RepeatableAlarm firstUiAlarm = new RepeatableAlarm(Time.from(10, 0), new int[] {TUESDAY});
-        RepeatableAlarm secondUiAlarm = new RepeatableAlarm(Time.from(8, 0), new int[] {1, 2, 3});
+        RepeatableAlarm firstUiAlarm = new RepeatableAlarm(Time.of(10, 0), new int[] {TUESDAY});
+        RepeatableAlarm secondUiAlarm = new RepeatableAlarm(Time.of(8, 0), new int[] {1, 2, 3});
 
         addAlarmsToTimeline(firstUiAlarm.breakIntoPieces());
         updateUIListOfAlarms(firstUiAlarm);

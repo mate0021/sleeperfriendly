@@ -12,7 +12,7 @@ public class Time implements Comparable<Time> {
         this.minute = minute;
     }
 
-    public static Time from(int hour, int minute) {
+    public static Time of(int hour, int minute) {
         if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
             throw new IllegalArgumentException("Wrong time value.");
         }

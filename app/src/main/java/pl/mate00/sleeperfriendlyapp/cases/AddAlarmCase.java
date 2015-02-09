@@ -59,7 +59,7 @@ public class AddAlarmCase {
     }
 
     public static RepeatableAlarm getAlarmFromUi() {
-        RepeatableAlarm result = new RepeatableAlarm(Time.from(8, 15), new int[] {1, 2, 3, 4, 5});
+        RepeatableAlarm result = new RepeatableAlarm(Time.of(8, 15), new int[] {1, 2, 3, 4, 5});
 
         return result;
     }

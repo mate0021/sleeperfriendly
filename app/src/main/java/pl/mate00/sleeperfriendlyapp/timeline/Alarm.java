@@ -12,9 +12,13 @@ public class Alarm implements Comparable<Alarm> {
     private boolean isEnabled;
 
     public Alarm(Time time, int dayOfWeek) {
+        this(time, dayOfWeek, true);
+    }
+
+    public Alarm(Time time, int dayOfWeek, boolean isEnabled) {
         this.time = time;
         this.dayOfWeek = dayOfWeek;
-        isEnabled = true;
+        this.isEnabled = isEnabled;
     }
 
     @Override
@@ -60,7 +64,7 @@ public class Alarm implements Comparable<Alarm> {
 
     public boolean isLaterThan(DateTime argTime) {
         int currentDay = argTime.getDayOfWeek();
-        Time currentTime = Time.from(argTime.getHourOfDay(), argTime.getMinuteOfHour());
+        Time currentTime = Time.of(argTime.getHourOfDay(), argTime.getMinuteOfHour());
         if (currentDay < dayOfWeek) {
             return true;
         } else if (currentDay == dayOfWeek && currentTime.compareTo(time) == -1) {

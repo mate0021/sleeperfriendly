@@ -42,8 +42,4 @@ public class TimelineDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-
-    public static void main(String[] args) {
-        System.out.println(SQL_CREATE);
-    }
 }

@@ -13,47 +13,47 @@ public class AlarmTest {
 
     @Test
     public void comparison_SmallerDayOfWeek() {
-        Alarm a1 = new Alarm(Time.from(8, 0), MONDAY);
-        Alarm a2 = new Alarm(Time.from(8, 0), TUESDAY);
+        Alarm a1 = new Alarm(Time.of(8, 0), MONDAY);
+        Alarm a2 = new Alarm(Time.of(8, 0), TUESDAY);
 
         Assert.assertEquals(a1.compareTo(a2), -1);
     }
 
     @Test
     public void comparison_GreaterDayOfWeek() {
-        Alarm a1 = new Alarm(Time.from(8, 0), WEDNESDAY);
-        Alarm a2 = new Alarm(Time.from(8, 0), TUESDAY);
+        Alarm a1 = new Alarm(Time.of(8, 0), WEDNESDAY);
+        Alarm a2 = new Alarm(Time.of(8, 0), TUESDAY);
 
         Assert.assertEquals(a1.compareTo(a2), 1);
     }
 
     @Test
     public void comparison_Equal() {
-        Alarm a1 = new Alarm(Time.from(8, 0), WEDNESDAY);
-        Alarm a2 = new Alarm(Time.from(8, 0), WEDNESDAY);
+        Alarm a1 = new Alarm(Time.of(8, 0), WEDNESDAY);
+        Alarm a2 = new Alarm(Time.of(8, 0), WEDNESDAY);
 
         Assert.assertEquals(a1.compareTo(a2), 0);
     }
 
     @Test
     public void comparison_SmallerTime() {
-        Alarm a1 = new Alarm(Time.from(7, 0), TUESDAY);
-        Alarm a2 = new Alarm(Time.from(8, 0), TUESDAY);
+        Alarm a1 = new Alarm(Time.of(7, 0), TUESDAY);
+        Alarm a2 = new Alarm(Time.of(8, 0), TUESDAY);
 
         Assert.assertEquals(a1.compareTo(a2), -1);
     }
 
     @Test
     public void comparison_GreaterTime() {
-        Alarm a1 = new Alarm(Time.from(10, 0), TUESDAY);
-        Alarm a2 = new Alarm(Time.from(8, 0), TUESDAY);
+        Alarm a1 = new Alarm(Time.of(10, 0), TUESDAY);
+        Alarm a2 = new Alarm(Time.of(8, 0), TUESDAY);
 
         Assert.assertEquals(a1.compareTo(a2), 1);
     }
 
     @Test
     public void isLaterThan_True_DayOfWeek() {
-        Alarm a = new Alarm(Time.from(6, 50), TUESDAY);
+        Alarm a = new Alarm(Time.of(6, 50), TUESDAY);
         DateTime currentTime = new DateTime();
         currentTime = currentTime.withDayOfWeek(MONDAY);
 
@@ -62,7 +62,7 @@ public class AlarmTest {
 
     @Test
     public void isLaterThan_False_DayOfWeek() {
-        Alarm a = new Alarm(Time.from(6, 50), TUESDAY);
+        Alarm a = new Alarm(Time.of(6, 50), TUESDAY);
         DateTime currentTime = new DateTime();
         currentTime = currentTime.withDayOfWeek(FRIDAY);
 
@@ -71,7 +71,7 @@ public class AlarmTest {
 
     @Test
     public void isLaterThan_True_Time() {
-        Alarm a = new Alarm(Time.from(6, 50), TUESDAY);
+        Alarm a = new Alarm(Time.of(6, 50), TUESDAY);
         DateTime currentTime = new DateTime();
         currentTime = currentTime.withDayOfWeek(TUESDAY).withTime(0, 0, 0, 0);
 
@@ -80,7 +80,7 @@ public class AlarmTest {
 
     @Test
     public void isLaterThan_False_Time() {
-        Alarm a = new Alarm(Time.from(6, 50), TUESDAY);
+        Alarm a = new Alarm(Time.of(6, 50), TUESDAY);
         DateTime currentTime = new DateTime();
         currentTime = currentTime.withDayOfWeek(TUESDAY).withTime(8, 0, 0, 0);
 

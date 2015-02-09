@@ -14,6 +14,8 @@ public final class DbConstants {
         public static final String COL_MINUTE = "minute";
         public static final String COL_ENABLED = "enabled";
 
-//        public static final String INSERT_ALARM = "insert into " + TABLE_NAME + " values (?, ?, ?, ?);";
+        public static final String COL_ALARM_COUNT = "alarm_count";
+        public static final String ALARM_COUNT = "select count(*) as " + COL_ALARM_COUNT + " from " + TABLE_NAME;
+        public static final String ALL_ALARMS = "select * from " + TABLE_NAME;
     }
 }
