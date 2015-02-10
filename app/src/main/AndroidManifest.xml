@@ -10,7 +10,15 @@
         <activity
             android:name=".ui.DbInsertActivity"
             android:label="@string/title_activity_db_insert" >
+        </activity>
+        <activity
+            android:name=".ui.AlarmsListActivity"
+            android:label="@string/title_activity_alarms_list" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
