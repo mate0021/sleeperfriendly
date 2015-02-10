@@ -1,10 +1,13 @@
 package pl.mate00.sleeperfriendlyapp.timeline;
 
-import static org.joda.time.DateTimeConstants.*;
-
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.joda.time.DateTimeConstants.FRIDAY;
+import static org.joda.time.DateTimeConstants.MONDAY;
+import static org.joda.time.DateTimeConstants.TUESDAY;
+import static org.joda.time.DateTimeConstants.WEDNESDAY;
 
 /**
  * Created by mamy on 19.01.15.

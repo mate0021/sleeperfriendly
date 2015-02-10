@@ -1,20 +1,11 @@
 package pl.mate00.sleeperfriendlyapp;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.junit.Before;
 import org.junit.Test;
 
 import pl.mate00.sleeperfriendlyapp.db.IPlaylistSelector;
-import pl.mate00.sleeperfriendlyapp.db.PathEntity;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class Mp3ShufflerTest {
 

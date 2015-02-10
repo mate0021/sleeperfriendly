@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;

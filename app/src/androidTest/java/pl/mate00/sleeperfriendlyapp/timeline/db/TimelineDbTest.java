@@ -10,10 +10,6 @@ import org.robolectric.annotation.Config;
 import pl.mate00.sleeperfriendlyapp.timeline.AbstractTimelineSuite;
 import pl.mate00.sleeperfriendlyapp.timeline.Timeline;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-
 @Config(emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class TimelineDbTest extends AbstractTimelineSuite {

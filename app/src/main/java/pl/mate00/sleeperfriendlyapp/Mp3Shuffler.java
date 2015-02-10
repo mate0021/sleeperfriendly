@@ -2,10 +2,7 @@ package pl.mate00.sleeperfriendlyapp;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.Stack;
 
 import pl.mate00.sleeperfriendlyapp.db.IPlaylistSelector;
 import pl.mate00.sleeperfriendlyapp.db.PathEntity;

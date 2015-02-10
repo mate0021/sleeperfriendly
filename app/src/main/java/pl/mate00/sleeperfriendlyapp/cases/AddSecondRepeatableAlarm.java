@@ -1,16 +1,18 @@
 package pl.mate00.sleeperfriendlyapp.cases;
 
-import static org.joda.time.DateTimeConstants.*;
+import org.joda.time.DateTime;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.joda.time.DateTime;
 
 import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Alarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Time;
 import pl.mate00.sleeperfriendlyapp.timeline.Timeline;
 import pl.mate00.sleeperfriendlyapp.timeline.TimelineConsole;
+
+import static org.joda.time.DateTimeConstants.TUESDAY;
 
 /**
  * Created by mamy on 30.01.15.

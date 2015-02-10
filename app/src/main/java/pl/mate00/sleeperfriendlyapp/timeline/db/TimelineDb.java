@@ -1,7 +1,5 @@
 package pl.mate00.sleeperfriendlyapp.timeline.db;
 
-import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.*;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,14 +7,21 @@ import android.database.sqlite.SQLiteDatabase;
 
 import org.joda.time.DateTime;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 import pl.mate00.sleeperfriendlyapp.timeline.Alarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Time;
 import pl.mate00.sleeperfriendlyapp.timeline.Timeline;
+
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.ALARM_COUNT;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.ALL_ALARMS;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_ALARM_COUNT;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_DAY_OF_WEEK;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_ENABLED;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_HOUR;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_MINUTE;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.TABLE_NAME;
 
 /**
  * Created by mamy on 30.01.15.
@@ -38,7 +43,7 @@ public class TimelineDb implements Timeline {
 
     @Override
     public void addAlarm(Alarm alarm) {
-        String isEnabled = "1";
+        String isEnabled = alarm.isEnabled() ? "1" : "0";
 
         dbWrite = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();

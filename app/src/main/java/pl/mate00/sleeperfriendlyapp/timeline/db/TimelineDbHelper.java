@@ -1,11 +1,15 @@
 package pl.mate00.sleeperfriendlyapp.timeline.db;
 
-import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.*;
-import static pl.mate00.sleeperfriendlyapp.db.DbConstants.*;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.DB_FILE;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_DAY_OF_WEEK;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_ENABLED;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_HOUR;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_MINUTE;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.TABLE_NAME;
 
 
 /**
