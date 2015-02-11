@@ -1,6 +1,7 @@
 package pl.mate00.sleeperfriendlyapp.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,7 +26,8 @@ public class AlarmsListActivity extends ActionBarActivity {
     private View.OnClickListener addAlarmClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Intent intent = new Intent(AlarmsListActivity.this, SetAlarmDetails.class);
+            startActivity(intent);
         }
     };
 
