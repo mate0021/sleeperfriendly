@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="20dp">
 
     <CheckBox
         android:id="@+id/is_enabled"
@@ -17,14 +18,12 @@
         <TextView
             android:id="@+id/alarm_time"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="9:15"/>
+            android:layout_height="match_parent" />
 
         <TextView
             android:id="@+id/alarm_days"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mon, Tue, Wed, Thu, Fri, Sat, Sun"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </LinearLayout>

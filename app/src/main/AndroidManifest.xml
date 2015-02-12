@@ -22,7 +22,8 @@
         </activity>
         <activity
             android:name=".ui.SetAlarmDetails"
-            android:label="@string/title_activity_set_alarm_details" >
+            android:label="@string/title_activity_set_alarm_details"
+            android:parentActivityName=".ui.AlarmsListActivity">
         </activity>
     </application>
 

@@ -55,9 +55,14 @@
             android:id="@+id/sunday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sun"
-            android:checked="true"
-            android:clickable="true"/>
+            android:text="Sun"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_add_alarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="saveAlarm"
+        android:text="Save" />
 
 </RelativeLayout>
