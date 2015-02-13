@@ -1,5 +1,6 @@
 package pl.mate00.sleeperfriendlyapp.ui;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,7 +23,6 @@ import pl.mate00.sleeperfriendlyapp.timeline.db.TimelineDb;
 
 public class SetAlarmDetails extends ActionBarActivity {
 
-    private Timeline timeline;
     private TimePicker timePicker;
 
     @Override
@@ -31,7 +31,6 @@ public class SetAlarmDetails extends ActionBarActivity {
         setContentView(R.layout.activity_set_alarm_details);
 
         timePicker = (TimePicker) findViewById(R.id.time_picker);
-        timeline = new TimelineDb(this);
     }
 
     public void saveAlarm(View view) {
@@ -39,12 +38,13 @@ public class SetAlarmDetails extends ActionBarActivity {
         int minute = timePicker.getCurrentMinute();
         int[] days = getDays();
 
-    }
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(AlarmsListActivity.ALARM_RESULT_HOUR, hour);
+        resultIntent.putExtra(AlarmsListActivity.ALARM_RESULT_MINUTE, minute);
+        resultIntent.putExtra(AlarmsListActivity.ALARM_RESULT_DAYS, days);
 
-    private RepeatableAlarm getAlarmFromUi(int hour, int minute, int[] days) {
-        RepeatableAlarm result = new RepeatableAlarm(Time.of(hour, minute), days);
-
-        return result;
+        setResult(RESULT_OK, resultIntent);
+        finish();
     }
 
     private int[] getDays() {

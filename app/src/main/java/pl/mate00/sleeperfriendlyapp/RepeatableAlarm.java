@@ -1,7 +1,9 @@
 package pl.mate00.sleeperfriendlyapp;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,27 +18,36 @@ import pl.mate00.sleeperfriendlyapp.timeline.Time;
  * Created by mamy on 30.01.15.
  */
 public class RepeatableAlarm {
-    private Time time;
+
+    private Time alarmTime;
     private int[] days;
     private DateTime currentTime;
     private boolean isEnabled;
 
     public RepeatableAlarm(Time time, int[] days) {
-        this.time = time;
+        this.alarmTime = time;
         this.days = days;
         isEnabled = true;
     }
 
     public RepeatableAlarm(Time time, DateTime currentTime) {
-        this.time = time;
+        this(time, new int[0]);
         this.currentTime = currentTime;
-        isEnabled = true;
     }
 
     public List<Alarm> breakIntoPieces() {
-        List<Alarm> result = new ArrayList<Alarm>(days.length);
+        List<Alarm> result = new ArrayList<Alarm>();
+
+        if (days.length == 0) {
+            if (currentTimeLessThan(alarmTime)) {
+                result.add(new Alarm(alarmTime, currentTime.getDayOfWeek()));
+            } else {
+                result.add(new Alarm(alarmTime, currentTime.plusDays(1).getDayOfWeek()));
+            }
+        }
+
         for (int day : days) {
-            result.add(new Alarm(time, day));
+            result.add(new Alarm(alarmTime, day));
         }
 
         return result;
@@ -50,8 +61,8 @@ public class RepeatableAlarm {
         this.isEnabled = isEnabled;
     }
 
-    public Time getTime() {
-        return time;
+    public Time getAlarmTime() {
+        return alarmTime;
     }
 
     @Override
@@ -61,20 +72,20 @@ public class RepeatableAlarm {
 
         RepeatableAlarm that = (RepeatableAlarm) o;
 
-        if (!time.equals(that.time)) return false;
+        if (!alarmTime.equals(that.alarmTime)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return time.hashCode();
+        return alarmTime.hashCode();
     }
 
     @Override
     public String toString() {
         return "RepeatableAlarm{" +
-                "time=" + time +
+                "alarmTime=" + alarmTime +
                 ", days=" + Arrays.toString(days) +
                 ", " + isEnabled +
                 '}';
@@ -82,7 +93,7 @@ public class RepeatableAlarm {
 
     public String formatAlarmTime(String timeFormat) {
         DateFormat format = new SimpleDateFormat(timeFormat);
-        DateTime dateTime = new DateTime().withHourOfDay(getTime().getHour()).withMinuteOfHour(getTime().getMinute());
+        DateTime dateTime = new DateTime().withHourOfDay(getAlarmTime().getHour()).withMinuteOfHour(getAlarmTime().getMinute());
         return format.format(dateTime.toDate());
     }
 
@@ -102,5 +113,12 @@ public class RepeatableAlarm {
         }
 
         return result;
+    }
+
+    private boolean currentTimeLessThan(Time time) {
+        int currentHour = currentTime.getHourOfDay();
+        int currentMinute = currentTime.getMinuteOfHour();
+
+        return Time.of(currentHour, currentMinute).compareTo(time) == -1;
     }
 }

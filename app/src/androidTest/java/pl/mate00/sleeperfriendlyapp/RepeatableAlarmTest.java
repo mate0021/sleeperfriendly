@@ -62,7 +62,6 @@ public class RepeatableAlarmTest {
     }
 
     @Test
-    @Ignore
     public void shouldReturnAlarmAtNearestTimePossible_TheSameDay() {
         DateTime currentDate = new DateTime().withDayOfWeek(MONDAY).withTime(6, 0, 0, 0);
         subject = new RepeatableAlarm(Time.of(8, 15), currentDate);
@@ -74,7 +73,6 @@ public class RepeatableAlarmTest {
     }
 
     @Test
-    @Ignore
     public void shouldReturnAlarmAtNearestTimePossible_NextDay() {
         DateTime currentDate = new DateTime().withDayOfWeek(MONDAY).withTime(9, 0, 0, 0);
         subject = new RepeatableAlarm(Time.of(8, 15), currentDate);
@@ -86,7 +84,6 @@ public class RepeatableAlarmTest {
     }
 
     @Test
-    @Ignore
     public void shouldReturnAlarmAtNearestTimePossible_NextWeek() {
         DateTime currentDate = new DateTime().withDayOfWeek(SUNDAY).withTime(21, 0, 0, 0);
         subject = new RepeatableAlarm(Time.of(8, 15), currentDate);
