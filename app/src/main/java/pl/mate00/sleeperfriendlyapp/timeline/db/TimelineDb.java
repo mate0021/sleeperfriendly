@@ -51,7 +51,7 @@ public class TimelineDb implements Timeline {
         values.put(COL_HOUR, alarm.getTime().getHour());
         values.put(COL_MINUTE, alarm.getTime().getMinute());
         values.put(COL_ENABLED, isEnabled);
-        dbWrite.insert(TABLE_NAME, null, values);
+        dbWrite.insertOrThrow(TABLE_NAME, null, values);
     }
 
     @Override
