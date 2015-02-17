@@ -32,14 +32,14 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarms_list_main_screen);
+        proxy = new AddAlarmProxy(this);
+        proxy.setUiListener(this);
 
         uiAlarms = restoreListOfAlarms();
         adapter = new AlarmItemAdapter(this, R.layout.alarm_list_row, uiAlarms);
         alarmsList = (ListView) findViewById(R.id.alarms_list);
         alarmsList.setAdapter(adapter);
 
-        proxy = new AddAlarmProxy(this);
-        proxy.setUiListener(this);
     }
 
     public void addNewAlarm(View view) {
@@ -59,17 +59,13 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     }
 
     private List<RepeatableAlarm> restoreListOfAlarms() {
-        List<RepeatableAlarm> alarms = new ArrayList<RepeatableAlarm>();
-
-//        alarms.add(new RepeatableAlarm(Time.of(8, 0), new int[] {1, 2, 3, 4, 5}));
-//        alarms.add(new RepeatableAlarm(Time.of(9, 0), new int[] {6, 7}));
-
-        return alarms;
+        return proxy.restoreUiAlarms();
     }
 
     @Override
     public void updateUiWithAlarm(RepeatableAlarm alarm) {
         uiAlarms.add(alarm);
+        proxy.addUiAlarm(alarm);
         adapter.notifyDataSetChanged();
     }
 

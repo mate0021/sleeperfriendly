@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
+import pl.mate00.sleeperfriendlyapp.db.DbConstants;
 import pl.mate00.sleeperfriendlyapp.timeline.Alarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Time;
 import pl.mate00.sleeperfriendlyapp.timeline.Timeline;
 import pl.mate00.sleeperfriendlyapp.timeline.db.TimelineDb;
+import pl.mate00.sleeperfriendlyapp.ui.db.UiAlarmDbHelper;
 
 /**
  * Created by mamy on 16.02.15.
@@ -37,6 +39,7 @@ public class AddAlarmProxy {
             Alarm alarm = new Alarm(Time.of(hour, minute), current.getDayOfWeek());
             try {
                 timeline.addAlarm(alarm);
+                listener.updateUiWithAlarm(new RepeatableAlarm(Time.of(hour, minute), current));
             } catch (SQLiteConstraintException e) {
                 listener.onErrorAfterAdding("Alarm already exists.");
             }
@@ -73,4 +76,35 @@ public class AddAlarmProxy {
             timeline.removeAlarm(alarm);
         }
     }
+
+    public List<RepeatableAlarm> restoreUiAlarms() {
+        List<RepeatableAlarm> alarms = new ArrayList<RepeatableAlarm>();
+
+        alarms.add(new RepeatableAlarm(Time.of(8, 0), new int[] {1, 2, 3, 4, 5}));
+        alarms.add(new RepeatableAlarm(Time.of(9, 0), new int[] {6, 7}));
+
+        return alarms;
+    }
+
+    public void addUiAlarm(RepeatableAlarm alarm) {
+
+    }
+}
+
+class UiAlarmState {
+
+    private UiAlarmDbHelper dbHelper;
+    private Context context;
+
+    public UiAlarmState(Context context) {
+        this.context = context;
+    }
+
+    public void addUiAlarm(RepeatableAlarm alarm) {
+    }
+
+    public List<RepeatableAlarm> restoreUiAlarms() {
+        return new ArrayList<RepeatableAlarm>();
+    }
+
 }
