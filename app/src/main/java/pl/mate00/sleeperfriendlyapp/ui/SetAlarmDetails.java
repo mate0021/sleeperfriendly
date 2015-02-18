@@ -1,12 +1,11 @@
 package pl.mate00.sleeperfriendlyapp.ui;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TimePicker;
 
@@ -16,10 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.mate00.sleeperfriendlyapp.R;
-import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
-import pl.mate00.sleeperfriendlyapp.timeline.Time;
-import pl.mate00.sleeperfriendlyapp.timeline.Timeline;
-import pl.mate00.sleeperfriendlyapp.timeline.db.TimelineDb;
 
 public class SetAlarmDetails extends ActionBarActivity {
 

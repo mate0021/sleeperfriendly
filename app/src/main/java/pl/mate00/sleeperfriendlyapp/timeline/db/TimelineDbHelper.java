@@ -1,11 +1,16 @@
 package pl.mate00.sleeperfriendlyapp.timeline.db;
 
-import static pl.mate00.sleeperfriendlyapp.db.DbConstants.*;
-import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.*;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.DATABASE_VERSION;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_DAY_OF_WEEK;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_ENABLED;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_HOUR;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.COL_MINUTE;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.DB_FILE_TIMELINE;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.Timeline.TABLE_NAME;
 
 
 
@@ -24,7 +29,7 @@ public class TimelineDbHelper extends SQLiteOpenHelper {
                     ");";
 
     public TimelineDbHelper(Context context) {
-        this(context, DB_FILE, null, DATABASE_VERSION);
+        this(context, DB_FILE_TIMELINE, null, DATABASE_VERSION);
     }
 
     public TimelineDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,

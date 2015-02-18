@@ -6,12 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.TextClock;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 import pl.mate00.sleeperfriendlyapp.R;

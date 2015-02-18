@@ -1,8 +1,5 @@
 package pl.mate00.sleeperfriendlyapp;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import org.joda.time.DateTime;
 
 import java.text.DateFormat;
@@ -25,9 +22,13 @@ public class RepeatableAlarm {
     private boolean isEnabled;
 
     public RepeatableAlarm(Time time, int[] days) {
+        this(time, days, true);
+    }
+
+    public RepeatableAlarm(Time time, int[] days, boolean isEnabled) {
         this.alarmTime = time;
         this.days = days;
-        isEnabled = true;
+        this.isEnabled = isEnabled;
     }
 
     public RepeatableAlarm(Time time, DateTime currentTime) {
@@ -63,6 +64,14 @@ public class RepeatableAlarm {
 
     public Time getAlarmTime() {
         return alarmTime;
+    }
+
+    public void setDays(int[] days) {
+        this.days = days;
+    }
+
+    public int[] getDays() {
+        return days;
     }
 
     @Override

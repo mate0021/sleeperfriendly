@@ -5,11 +5,12 @@ package pl.mate00.sleeperfriendlyapp.db;
  */
 public final class DbConstants {
 
-    public static final String DB_FILE = "sleeperfriendly.db";
 
     public static final int DATABASE_VERSION = 1;
 
     public static abstract class Timeline {
+        public static final String DB_FILE_TIMELINE = "sleeperfriendly.db";
+
         public static final String TABLE_NAME = "timeline";
         public static final String COL_DAY_OF_WEEK = "dow";
         public static final String COL_HOUR = "hour";
@@ -22,7 +23,9 @@ public final class DbConstants {
     }
 
     public static abstract class UiAlarm {
-        public static final String TABLE_NAME = "";
+        public static final String DB_FILE_UI = "ui_alarms.db";
+
+        public static final String TABLE_NAME = "ui_alarm";
         public static final String COL_HOUR = "hour";
         public static final String COL_MINUTE = "minute";
         public static final String COL_DAYS = "days";

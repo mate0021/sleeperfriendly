@@ -1,8 +1,8 @@
 package pl.mate00.sleeperfriendlyapp.ui;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -26,6 +26,7 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     private List<RepeatableAlarm> uiAlarms = new ArrayList<>();
 
     private AddAlarmProxy proxy;
+    private UiAlarmState uiListHandler;
 
 
     @Override
@@ -34,6 +35,7 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
         setContentView(R.layout.alarms_list_main_screen);
         proxy = new AddAlarmProxy(this);
         proxy.setUiListener(this);
+        uiListHandler = new UiAlarmState(this);
 
         uiAlarms = restoreListOfAlarms();
         adapter = new AlarmItemAdapter(this, R.layout.alarm_list_row, uiAlarms);
@@ -59,13 +61,13 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     }
 
     private List<RepeatableAlarm> restoreListOfAlarms() {
-        return proxy.restoreUiAlarms();
+        return uiListHandler.restoreUiAlarms();
     }
 
     @Override
     public void updateUiWithAlarm(RepeatableAlarm alarm) {
         uiAlarms.add(alarm);
-        proxy.addUiAlarm(alarm);
+        uiListHandler.addUiAlarm(alarm);
         adapter.notifyDataSetChanged();
     }
 

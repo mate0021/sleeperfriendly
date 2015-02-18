@@ -1,9 +1,6 @@
 package pl.mate00.sleeperfriendlyapp;
 
-import static junit.framework.Assert.assertTrue;
-import static org.joda.time.DateTimeConstants.*;
 import org.joda.time.DateTime;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,6 +10,9 @@ import pl.mate00.sleeperfriendlyapp.timeline.Alarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Time;
 
 import static junit.framework.Assert.assertEquals;
+import static org.joda.time.DateTimeConstants.MONDAY;
+import static org.joda.time.DateTimeConstants.SUNDAY;
+import static org.joda.time.DateTimeConstants.TUESDAY;
 
 /**
  * Created by mamy on 11.02.15.
