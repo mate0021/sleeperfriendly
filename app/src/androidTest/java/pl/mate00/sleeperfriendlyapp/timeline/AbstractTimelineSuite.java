@@ -1,5 +1,7 @@
 package pl.mate00.sleeperfriendlyapp.timeline;
 
+import android.database.sqlite.SQLiteException;
+
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,7 +24,7 @@ import static org.joda.time.DateTimeConstants.WEDNESDAY;
  */
 public abstract class AbstractTimelineSuite {
 
-    Timeline subject;
+    protected Timeline subject;
 
     public abstract Timeline getTimelineInstance();
 
@@ -104,14 +106,6 @@ public abstract class AbstractTimelineSuite {
         Alarm closestAlarm = subject.getClosestTo(dt);
 
         Assert.assertEquals(a3, closestAlarm);
-    }
-
-    @Test
-    public void addOnlyUniqueAlarms() {
-        subject.addAlarm(anyAlarm());
-        subject.addAlarm(anyAlarm());
-
-        Assert.assertEquals(1, subject.getNumberOfAlarms());
     }
 
     @Test
@@ -231,14 +225,6 @@ public abstract class AbstractTimelineSuite {
     }
 
     @Test
-    public void shouldAddOnlyUniqueAlarms() {
-        subject.addAlarm(anyAlarm());
-        subject.addAlarm(anyAlarm());
-
-        assertEquals(1, subject.getNumberOfAlarms());
-    }
-
-    @Test
     public void shouldReturnNumberOfAllAddedAlarms() {
         subject.addAlarm(new Alarm(Time.of(8, 0), 1));
         subject.addAlarm(new Alarm(Time.of(8, 15), 1));
@@ -246,11 +232,11 @@ public abstract class AbstractTimelineSuite {
         assertEquals(2, subject.getNumberOfAlarms());
     }
 
-    private Alarm anyAlarm() {
+    protected Alarm anyAlarm() {
         return new Alarm(Time.of(0, 51), Calendar.MONDAY);
     }
 
-    private DateTime anyDateTime() {
+    protected DateTime anyDateTime() {
         DateTime result = new DateTime();
         result = result.withYear(2015).withMonthOfYear(01).withDayOfMonth(12).withHourOfDay(8).withMinuteOfHour(15);
 
