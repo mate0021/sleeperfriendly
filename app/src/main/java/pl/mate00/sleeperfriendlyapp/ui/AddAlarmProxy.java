@@ -1,7 +1,11 @@
 package pl.mate00.sleeperfriendlyapp.ui;
 
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
+import android.app.AlarmManager;
 
 import org.joda.time.DateTime;
 
@@ -21,14 +25,14 @@ public class AddAlarmProxy {
 
     private Timeline timeline;
 
-    private AddAlarmUiCase listener;
+    private AddAlarmUiCase listenerUi;
 
     public AddAlarmProxy(Context context) {
         this.timeline = new TimelineDb(context);
     }
 
-    public void setUiListener(AddAlarmUiCase listener) {
-        this.listener = listener;
+    public void setUiListener(AddAlarmUiCase listenerUi) {
+        this.listenerUi = listenerUi;
     }
 
     public void addRepeatableAlarm(int hour, int minute, int[] days) {
@@ -37,15 +41,15 @@ public class AddAlarmProxy {
             Alarm alarm = new Alarm(Time.of(hour, minute), current.getDayOfWeek());
             try {
                 timeline.addAlarm(alarm);
-                listener.updateUiWithAlarm(new RepeatableAlarm(Time.of(hour, minute), current));
+                listenerUi.updateUiWithAlarm(new RepeatableAlarm(Time.of(hour, minute), current));
             } catch (SQLiteConstraintException e) {
-                listener.onErrorAfterAdding("Alarm already exists.");
+                listenerUi.onErrorAfterAdding("Alarm already exists.");
             }
         } else {
             if (insertOrRollBack(hour, minute, days)) {
-                listener.updateUiWithAlarm(new RepeatableAlarm(Time.of(hour, minute), days));
+                listenerUi.updateUiWithAlarm(new RepeatableAlarm(Time.of(hour, minute), days));
             } else {
-                listener.onErrorAfterAdding("Part of alarm already exists.");
+                listenerUi.onErrorAfterAdding("Part of alarm already exists.");
             }
         }
     }
@@ -76,3 +80,31 @@ public class AddAlarmProxy {
     }
 }
 
+
+interface AlarmsManager {
+    void updateWithClosestAlarm(Alarm alarm);
+
+}
+
+class AlarmManagerMobile implements AlarmsManager {
+    private Context context;
+    private Intent alarmReceiverIntent;
+
+    public void updateWithClosestAlarm(Alarm alarm) {
+        PendingIntent operation = PendingIntent.getBroadcast(context, 0, alarmReceiverIntent, 0);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmToMillis(alarm), operation);
+    }
+
+    private long alarmToMillis(Alarm alarm) {
+        return 0;
+    }
+}
+
+class AlarmReceiver extends BroadcastReceiver {
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+    }
+}

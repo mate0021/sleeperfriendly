@@ -25,7 +25,7 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     private ArrayAdapter<RepeatableAlarm> adapter;
     private List<RepeatableAlarm> uiAlarms = new ArrayList<>();
 
-    private AddAlarmProxy proxy;
+    private AddAlarmProxy uiHandler;
     private UiAlarmState uiListHandler;
 
 
@@ -33,8 +33,8 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarms_list_main_screen);
-        proxy = new AddAlarmProxy(this);
-        proxy.setUiListener(this);
+        uiHandler = new AddAlarmProxy(this);
+        uiHandler.setUiListener(this);
         uiListHandler = new UiAlarmState(this);
 
         uiAlarms = restoreListOfAlarms();
@@ -56,7 +56,7 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
             int minute = data.getIntExtra(ALARM_RESULT_MINUTE, 00);
             int[] days = data.getIntArrayExtra(ALARM_RESULT_DAYS);
 
-            proxy.addRepeatableAlarm(hour, minute, days);
+            uiHandler.addRepeatableAlarm(hour, minute, days);
         }
     }
 
