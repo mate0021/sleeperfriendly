@@ -1,7 +1,5 @@
 package pl.mate00.sleeperfriendlyapp.timeline;
 
-import android.database.sqlite.SQLiteException;
-
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
