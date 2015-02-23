@@ -23,8 +23,14 @@
         <activity
             android:name=".ui.SetAlarmDetails"
             android:label="@string/title_activity_set_alarm_details"
-            android:parentActivityName=".ui.AlarmsListActivity">
+            android:parentActivityName=".ui.AlarmsListActivity" >
         </activity>
+
+        <receiver
+            android:name=".NextAlarmReceiver"
+            android:enabled="true"
+            android:exported="true" >
+        </receiver>
     </application>
 
 </manifest>

@@ -33,7 +33,7 @@ public class UiAlarmState {
         ContentValues values = new ContentValues();
         values.put(COL_HOUR, alarm.getAlarmTime().getHour());
         values.put(COL_MINUTE, alarm.getAlarmTime().getMinute());
-        values.put(COL_DAYS, getDays(alarm.getDays()));
+        values.put(COL_DAYS, daysToString(alarm.getDays()));
         values.put(COL_ENABLED, String.valueOf(alarm.isEnabled()));
         dbWrite.insertOrThrow(TABLE_NAME, null, values);
     }
@@ -64,7 +64,7 @@ public class UiAlarmState {
         return result;
     }
 
-    private String getDays(int[] days) {
+    private String daysToString(int[] days) {
         String result = "";
 
         for(int i = 0; i < days.length; i++) {
@@ -72,6 +72,10 @@ public class UiAlarmState {
             if (i < days.length - 1) {
                 result += ",";
             }
+        }
+
+        if (result.isEmpty()) {
+            result = "0";
         }
 
         return result;

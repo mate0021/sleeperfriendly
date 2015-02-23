@@ -110,11 +110,11 @@ public class RepeatableAlarm {
         String result = "";
 
         String[] week = new String[] {
-            "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
+            "", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
         };
 
         for (int i = 0; i < days.length; i++) {
-            result += week[days[i] - 1];
+            result += week[days[i]];
 
             if (i < days.length - 1) {
                 result += ", ";
