@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +58,8 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
             int minute = data.getIntExtra(ALARM_RESULT_MINUTE, 00);
             int[] days = data.getIntArrayExtra(ALARM_RESULT_DAYS);
 
-            uiHandler.addRepeatableAlarm(hour, minute, days);
+            DateTime current = new DateTime();
+            uiHandler.addRepeatableAlarm(hour, minute, days, current);
         }
     }
 

@@ -39,10 +39,12 @@ public class AddAlarmProxy {
         this.listenerUi = listenerUi;
     }
 
-    public void addRepeatableAlarm(int hour, int minute, int[] days) {
-        DateTime current = new DateTime();
+    public void addRepeatableAlarm(int hour, int minute, int[] days, DateTime current) {
         if (days.length == 0) {
-            Alarm alarm = new Alarm(Time.of(hour, minute), current.getDayOfWeek());
+            Time uiTime = Time.of(hour, minute);
+            Time currentTime = Time.of(current.getHourOfDay(), current.getMinuteOfHour());
+            int dayOfWeek = currentTime.compareTo(uiTime) < 0 ? current.getDayOfWeek() : current.getDayOfWeek() + 1;
+            Alarm alarm = new Alarm(uiTime, dayOfWeek);
             try {
                 timeline.addAlarm(alarm);
                 listenerUi.updateUiWithAlarm(new RepeatableAlarm(Time.of(hour, minute), current));
@@ -91,37 +93,3 @@ public class AddAlarmProxy {
         }
     }
 }
-
-
-interface AlarmsManager {
-    void updateWithClosestAlarm(Alarm alarm);
-
-}
-
-class AlarmManagerMobile implements AlarmsManager {
-    private Context context;
-
-    public AlarmManagerMobile(Context context) {
-        this.context = context;
-    }
-
-    public void updateWithClosestAlarm(Alarm alarm) {
-        Intent alarmIntent = new Intent(context, NextAlarmReceiver.class);
-        alarmIntent.setAction("ALARM_ACTION");
-        PendingIntent operation = PendingIntent.getBroadcast(context, 0, alarmIntent, 0);
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmToMillis(alarm), operation);
-    }
-
-    private long alarmToMillis(Alarm alarm) {
-        System.out.println(" *** closest " + alarm);
-        DateTime alarmTime =
-                new DateTime().
-                        withTime(alarm.getTime().getHour(), alarm.getTime().getMinute(), 0, 0).
-                        withDayOfWeek(alarm.getDayOfWeek());
-        System.out.println(" **** " + alarmTime);
-
-        return alarmTime.getMillis();
-    }
-}
-
