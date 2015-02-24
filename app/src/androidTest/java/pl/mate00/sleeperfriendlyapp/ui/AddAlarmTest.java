@@ -130,7 +130,7 @@ public class AddAlarmTest {
     }
 
     @Test
-    public void alarmWasAddedWithNoDays_DaysShouldNotBeDisplayed() {
+    public void alarmWasAddedWithNoDays_TheClosestDayShouldBeDisplayed() {
         alarmsListActivity.addNewAlarm(null);
 
         Intent resultingIntent = new Intent();
@@ -148,7 +148,7 @@ public class AddAlarmTest {
         View listItem = listView.getAdapter().getView(0, null, null);
         TextView daysDisplayed = (TextView) listItem.findViewById(R.id.alarm_days);
 
-        assertTrue(daysDisplayed.getText().toString().isEmpty());
+        assertFalse(daysDisplayed.getText().toString().isEmpty());
     }
 
     @Test

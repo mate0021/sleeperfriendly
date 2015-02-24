@@ -14,6 +14,7 @@ import pl.mate00.sleeperfriendlyapp.timeline.Alarm;
  * Created by mamy on 23.02.15.
  */
 public class AlarmManagerMobile {
+
     private Context context;
 
     public AlarmManagerMobile(Context context) {
@@ -29,12 +30,10 @@ public class AlarmManagerMobile {
     }
 
     private long alarmToMillis(Alarm alarm) {
-        System.out.println(" *** closest " + alarm);
         DateTime alarmTime =
                 new DateTime().
                         withTime(alarm.getTime().getHour(), alarm.getTime().getMinute(), 0, 0).
                         withDayOfWeek(alarm.getDayOfWeek());
-        System.out.println(" **** " + alarmTime);
 
         return alarmTime.getMillis();
     }

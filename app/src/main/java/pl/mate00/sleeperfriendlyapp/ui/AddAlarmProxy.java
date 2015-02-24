@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
 import android.app.AlarmManager;
+import android.database.sqlite.SQLiteException;
 
 import org.joda.time.DateTime;
 
@@ -43,13 +44,13 @@ public class AddAlarmProxy {
         if (days.length == 0) {
             Time uiTime = Time.of(hour, minute);
             Time currentTime = Time.of(current.getHourOfDay(), current.getMinuteOfHour());
-            int dayOfWeek = currentTime.compareTo(uiTime) < 0 ? current.getDayOfWeek() : current.getDayOfWeek() + 1;
+            int dayOfWeek = currentTime.compareTo(uiTime) < 0 ? current.getDayOfWeek() : current.plusDays(1).getDayOfWeek();
             Alarm alarm = new Alarm(uiTime, dayOfWeek);
             try {
                 timeline.addAlarm(alarm);
-                listenerUi.updateUiWithAlarm(new RepeatableAlarm(Time.of(hour, minute), current));
+                listenerUi.updateUiWithAlarm(new RepeatableAlarm(Time.of(hour, minute), new int[]{dayOfWeek}));
                 registerClosestAlarm(current);
-            } catch (SQLiteConstraintException e) {
+            } catch (SQLiteException e) {
                 listenerUi.onErrorAfterAdding("Alarm already exists.");
             }
         } else {
@@ -77,7 +78,7 @@ public class AddAlarmProxy {
             try {
                 timeline.addAlarm(a);
                 alreadyAdded.add(a);
-            } catch (SQLiteConstraintException e) {
+            } catch (SQLiteException e) {
                 isSuccessful = false;
                 removeAlarms(alreadyAdded);
                 break;
