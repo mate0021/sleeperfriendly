@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -30,6 +31,14 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     private AddAlarmProxy uiHandler;
     private UiAlarmState uiListHandler;
 
+    private AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            RepeatableAlarm item = (RepeatableAlarm) parent.getItemAtPosition(position);
+            Toast.makeText(AlarmsListActivity.this, item.toString(), Toast.LENGTH_LONG).show();
+            return true;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +50,10 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
 
         uiAlarms = restoreListOfAlarms();
         adapter = new AlarmItemAdapter(this, R.layout.alarm_list_row, uiAlarms);
+
         alarmsList = (ListView) findViewById(R.id.alarms_list);
         alarmsList.setAdapter(adapter);
-
+        alarmsList.setOnItemLongClickListener(itemLongClickListener);
     }
 
     public void addNewAlarm(View view) {

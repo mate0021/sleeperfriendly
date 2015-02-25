@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:clickable="true"
+    android:longClickable="true">
 
     <CheckBox
         android:id="@+id/is_enabled"
