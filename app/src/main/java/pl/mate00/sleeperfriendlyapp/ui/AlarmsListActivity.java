@@ -3,10 +3,16 @@ package pl.mate00.sleeperfriendlyapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import org.joda.time.DateTime;
@@ -36,6 +42,7 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
             RepeatableAlarm item = (RepeatableAlarm) parent.getItemAtPosition(position);
             Toast.makeText(AlarmsListActivity.this, item.toString(), Toast.LENGTH_LONG).show();
+
             return true;
         }
     };
@@ -53,7 +60,22 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
 
         alarmsList = (ListView) findViewById(R.id.alarms_list);
         alarmsList.setAdapter(adapter);
-        alarmsList.setOnItemLongClickListener(itemLongClickListener);
+
+        registerForContextMenu(alarmsList);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu,  View view,  ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, view, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_alarm_item, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+        System.out.println(info);
+        return false;
     }
 
     public void addNewAlarm(View view) {
