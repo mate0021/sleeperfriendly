@@ -37,15 +37,6 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     private AddAlarmProxy uiHandler;
     private UiAlarmState uiListHandler;
 
-    private AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener() {
-        @Override
-        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            RepeatableAlarm item = (RepeatableAlarm) parent.getItemAtPosition(position);
-            Toast.makeText(AlarmsListActivity.this, item.toString(), Toast.LENGTH_LONG).show();
-
-            return true;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +65,13 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-        System.out.println(info);
-        return false;
+
+        switch (item.getItemId()) {
+            case R.id.menu_item_delete_alarm:
+                RepeatableAlarm selectedItem = uiAlarms.get(info.position);
+        }
+
+        return true;
     }
 
     public void addNewAlarm(View view) {
