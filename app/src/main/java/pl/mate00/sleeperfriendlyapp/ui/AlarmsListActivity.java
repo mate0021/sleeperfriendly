@@ -23,7 +23,7 @@ import java.util.List;
 import pl.mate00.sleeperfriendlyapp.R;
 import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
 
-public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiCase {
+public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiCase, DeleteAlarmUiCase {
 
     static final int ALARM_TIME_REQUEST = 1;
     static final String ALARM_RESULT_HOUR = "ui_hour";
@@ -35,6 +35,7 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     private List<RepeatableAlarm> uiAlarms = new ArrayList<>();
 
     private AddAlarmProxy uiHandler;
+    private DeleteAlarmProxy deleteAlarmUiHandler;
     private UiAlarmState uiListHandler;
 
 
@@ -43,7 +44,11 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarms_list_main_screen);
         uiHandler = new AddAlarmProxy(this);
+        deleteAlarmUiHandler = new DeleteAlarmProxy(this);
+
         uiHandler.setUiListener(this);
+        deleteAlarmUiHandler.setUiListener(this);
+
         uiListHandler = new UiAlarmState(this);
 
         uiAlarms = restoreListOfAlarms();
@@ -62,21 +67,20 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
         inflater.inflate(R.menu.menu_alarm_item, menu);
     }
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-
-        switch (item.getItemId()) {
-            case R.id.menu_item_delete_alarm:
-                RepeatableAlarm selectedItem = uiAlarms.get(info.position);
-        }
-
-        return true;
-    }
-
-    public void addNewAlarm(View view) {
+    public void onAddAlarmClick(View view) {
         Intent intent = new Intent(this, SetAlarmDetails.class);
         startActivityForResult(intent, ALARM_TIME_REQUEST);
+    }
+
+    private void deleteAlarm(RepeatableAlarm alarm) {
+        deleteAlarmUiHandler.deleteAlarm(alarm);
+    }
+
+    public void onDeleteAlarmClick(MenuItem item) {
+        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+        RepeatableAlarm selectedAlarm = uiAlarms.get(info.position);
+        System.out.println(selectedAlarm);
+        deleteAlarm(selectedAlarm);
     }
 
     @Override
@@ -105,5 +109,15 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     @Override
     public void onErrorAfterAdding(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void updateUiOnDeleteAlarm(RepeatableAlarm alarm) {
+
+    }
+
+    @Override
+    public void onErrorAfterDeleting(String message) {
+
     }
 }

@@ -3,6 +3,7 @@
 
     <item
         android:id="@+id/menu_item_delete_alarm"
-        android:title="Delete"/>
+        android:title="Delete"
+        android:onClick="onDeleteAlarmClick"/>
 
 </menu>

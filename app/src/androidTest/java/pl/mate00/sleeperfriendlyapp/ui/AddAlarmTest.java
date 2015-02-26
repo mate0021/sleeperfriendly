@@ -78,7 +78,7 @@ public class AddAlarmTest {
 
     @Test
     public void backToAlarmsListAfterSettingAlarm_ListHasAlarm() {
-        alarmsListActivity.addNewAlarm(null);
+        alarmsListActivity.onAddAlarmClick(null);
 
         Intent resultingIntent = new Intent();
         resultingIntent.putExtra(AlarmsListActivity.ALARM_RESULT_HOUR, "8");
@@ -96,7 +96,7 @@ public class AddAlarmTest {
 
     @Test
     public void backToAlarmsListAfterCancellingSettingAlarm_ListEmpty() {
-        alarmsListActivity.addNewAlarm(null);
+        alarmsListActivity.onAddAlarmClick(null);
 
         shadowOf(alarmsListActivity).receiveResult(
                 new Intent(alarmsListActivity, SetAlarmDetails.class),
@@ -109,7 +109,7 @@ public class AddAlarmTest {
 
     @Test
     public void alarmWasAddedWithDays_DaysShouldBeDisplayed() {
-        alarmsListActivity.addNewAlarm(null);
+        alarmsListActivity.onAddAlarmClick(null);
 
         Intent resultingIntent = new Intent();
         resultingIntent.putExtra(AlarmsListActivity.ALARM_RESULT_HOUR, "8");
@@ -131,7 +131,7 @@ public class AddAlarmTest {
 
     @Test
     public void alarmWasAddedWithNoDays_TheClosestDayShouldBeDisplayed() {
-        alarmsListActivity.addNewAlarm(null);
+        alarmsListActivity.onAddAlarmClick(null);
 
         Intent resultingIntent = new Intent();
         resultingIntent.putExtra(AlarmsListActivity.ALARM_RESULT_HOUR, "8");
@@ -153,7 +153,7 @@ public class AddAlarmTest {
 
     @Test
     public void addedAlarmIsDisplayedAsEnabled() {
-        alarmsListActivity.addNewAlarm(null);
+        alarmsListActivity.onAddAlarmClick(null);
 
         Intent resultingIntent = new Intent();
         resultingIntent.putExtra(AlarmsListActivity.ALARM_RESULT_HOUR, "8");

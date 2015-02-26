@@ -17,7 +17,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Add new alarm"
-    android:onClick="addNewAlarm"
+    android:onClick="onAddAlarmClick"
     android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
