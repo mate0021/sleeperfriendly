@@ -26,7 +26,7 @@ robolectric {
 
     jvmArgs '-XX:MaxPermSize=512m', '-XX:-UseSplitVerifier'
 
-    ignoreFailures true
+    ignoreFailures false
 
     afterTest { descriptor, result ->
         println "Executing test for {$descriptor.name} with result: ${result.resultType}"
