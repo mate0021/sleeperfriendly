@@ -38,6 +38,20 @@ public class UiAlarmState {
         dbWrite.insertOrThrow(TABLE_NAME, null, values);
     }
 
+    public void deleteUiAlarm(RepeatableAlarm alarm) {
+        dbWrite = dbHelper.getWritableDatabase();
+        String selection =
+                COL_HOUR + " = ? and " +
+                COL_MINUTE + " = ? and " +
+                COL_DAYS + " = ? ";
+        String[] args = {
+                String.valueOf(alarm.getAlarmTime().getHour()),
+                String.valueOf(alarm.getAlarmTime().getMinute()),
+                daysToString(alarm.getDays())
+        };
+        dbWrite.delete(TABLE_NAME, selection, args);
+    }
+
     public List<RepeatableAlarm> restoreUiAlarms() {
         dbRead = dbHelper.getReadableDatabase();
         Cursor cursor = dbRead.query(

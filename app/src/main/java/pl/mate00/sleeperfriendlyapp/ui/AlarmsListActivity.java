@@ -8,11 +8,9 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import org.joda.time.DateTime;
@@ -23,7 +21,7 @@ import java.util.List;
 import pl.mate00.sleeperfriendlyapp.R;
 import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
 
-public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiCase, DeleteAlarmUiCase {
+public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks {
 
     static final int ALARM_TIME_REQUEST = 1;
     static final String ALARM_RESULT_HOUR = "ui_hour";
@@ -34,21 +32,25 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     private ArrayAdapter<RepeatableAlarm> adapter;
     private List<RepeatableAlarm> uiAlarms = new ArrayList<>();
 
-    private AddAlarmProxy uiHandler;
+//    private AddAlarmProxy uiHandler;
     private DeleteAlarmProxy deleteAlarmUiHandler;
     private UiAlarmState uiListHandler;
+
+    private UiCasesHandler uiCasesHandler;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarms_list_main_screen);
-        uiHandler = new AddAlarmProxy(this);
-        deleteAlarmUiHandler = new DeleteAlarmProxy(this);
+//        uiHandler = new AddAlarmProxy(this);
+//        deleteAlarmUiHandler = new DeleteAlarmProxy(this);
+//
+//        uiHandler.setListenerUi(this);
+//        deleteAlarmUiHandler.setListenerUi(this);
 
-        uiHandler.setUiListener(this);
-        deleteAlarmUiHandler.setUiListener(this);
-
+        uiCasesHandler = new UiCasesHandler(this);
+        uiCasesHandler.setListenerUi(this);
         uiListHandler = new UiAlarmState(this);
 
         uiAlarms = restoreListOfAlarms();
@@ -73,13 +75,14 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     }
 
     private void deleteAlarm(RepeatableAlarm alarm) {
-        deleteAlarmUiHandler.deleteAlarm(alarm);
+//        deleteAlarmUiHandler.deleteAlarm(alarm);
+        DateTime current = new DateTime();
+        uiCasesHandler.deleteAlarm(alarm, current);
     }
 
     public void onDeleteAlarmClick(MenuItem item) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
         RepeatableAlarm selectedAlarm = uiAlarms.get(info.position);
-        System.out.println(selectedAlarm);
         deleteAlarm(selectedAlarm);
     }
 
@@ -91,7 +94,8 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
             int[] days = data.getIntArrayExtra(ALARM_RESULT_DAYS);
 
             DateTime current = new DateTime();
-            uiHandler.addRepeatableAlarm(hour, minute, days, current);
+            uiCasesHandler.addAlarm(hour, minute, days, current);
+//            uiHandler.addRepeatableAlarm(hour, minute, days, current);
         }
     }
 
@@ -112,12 +116,14 @@ public class AlarmsListActivity extends ActionBarActivity implements AddAlarmUiC
     }
 
     @Override
-    public void updateUiOnDeleteAlarm(RepeatableAlarm alarm) {
-
+    public void updateUiAfterDelete(RepeatableAlarm alarm) {
+        uiAlarms.remove(alarm);
+        uiListHandler.deleteUiAlarm(alarm);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onErrorAfterDeleting(String message) {
-
+    public void onErrorAfterDelete(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

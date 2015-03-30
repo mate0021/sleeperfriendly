@@ -45,6 +45,10 @@ public class DeleteAlarmTest {
         assertEquals(0, alarmsList.getAdapter().getCount());
     }
 
+    @Test
+    public void addOneAlarm_DeleteOneAlarm_() {
+    }
+
     private void addOneAlarm_WholeWeek() {
         alarmsListActivity.onAddAlarmClick(null);
 

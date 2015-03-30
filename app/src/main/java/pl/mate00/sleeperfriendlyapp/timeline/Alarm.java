@@ -89,5 +89,14 @@ public class Alarm implements Comparable<Alarm> {
     public Time getTime() {
         return time;
     }
+
+    public long toMillis() {
+        DateTime alarmTime =
+                new DateTime().
+                        withTime(getTime().getHour(), getTime().getMinute(), 0, 0).
+                        withDayOfWeek(getDayOfWeek());
+
+        return alarmTime.getMillis();
+    }
 }
 

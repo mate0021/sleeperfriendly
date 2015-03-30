@@ -26,15 +26,7 @@ public class AlarmManagerMobile {
         alarmIntent.setAction("ALARM_ACTION");
         PendingIntent operation = PendingIntent.getBroadcast(context, 0, alarmIntent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmToMillis(alarm), operation);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alarm.toMillis(), operation);
     }
 
-    private long alarmToMillis(Alarm alarm) {
-        DateTime alarmTime =
-                new DateTime().
-                        withTime(alarm.getTime().getHour(), alarm.getTime().getMinute(), 0, 0).
-                        withDayOfWeek(alarm.getDayOfWeek());
-
-        return alarmTime.getMillis();
-    }
 }
