@@ -1,5 +1,7 @@
 package pl.mate00.sleeperfriendlyapp.cases;
 
+import com.google.common.base.Optional;
+
 import org.joda.time.DateTime;
 
 import java.util.HashSet;
@@ -54,7 +56,7 @@ public class AddSecondRepeatableAlarm {
         System.out.println(uiAlarms);
     }
 
-    public static Alarm getClosestAlarmTo(DateTime current) {
+    public static Optional<Alarm> getClosestAlarmTo(DateTime current) {
         return timeline.getClosestTo(current);
     }
 

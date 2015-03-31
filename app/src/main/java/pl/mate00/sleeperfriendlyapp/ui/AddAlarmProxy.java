@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.app.AlarmManager;
 import android.database.sqlite.SQLiteException;
 
+import com.google.common.base.Optional;
+
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -64,9 +66,11 @@ public class AddAlarmProxy {
     }
 
     private void registerClosestAlarm(DateTime currentTime) {
-        Alarm closest = timeline.getClosestTo(currentTime);
-        AlarmManagerMobile manager = new AlarmManagerMobile(context);
-        manager.updateWithClosestAlarm(closest);
+        Optional<Alarm> closest = timeline.getClosestTo(currentTime);
+        if (closest.isPresent()) {
+            AlarmManagerMobile manager = new AlarmManagerMobile(context);
+            manager.updateWithClosestAlarm(closest.get());
+        }
     }
 
     private boolean insertOrRollBack(int hour, int minute, int[] days) {

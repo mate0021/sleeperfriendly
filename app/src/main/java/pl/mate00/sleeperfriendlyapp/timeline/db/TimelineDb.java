@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.google.common.base.Optional;
+
 import org.joda.time.DateTime;
 
 import java.util.Set;
@@ -55,7 +57,7 @@ public class TimelineDb implements Timeline {
     }
 
     @Override
-    public Alarm getClosestTo(DateTime currentTime) {
+    public Optional<Alarm> getClosestTo(DateTime currentTime) {
         Set<Alarm> allAlarms = getAllAlarms();
         Alarm result = getFirstEnabledAlarm(allAlarms);
 
@@ -66,7 +68,11 @@ public class TimelineDb implements Timeline {
             }
         }
 
-        return result;
+        if (result == null) {
+            return Optional.absent();
+        } else {
+            return Optional.of(result);
+        }
     }
 
     @Override

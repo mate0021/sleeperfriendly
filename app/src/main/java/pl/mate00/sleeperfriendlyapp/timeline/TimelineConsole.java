@@ -1,5 +1,7 @@
 package pl.mate00.sleeperfriendlyapp.timeline;
 
+import com.google.common.base.Optional;
+
 import org.joda.time.DateTime;
 
 import java.util.Set;
@@ -36,8 +38,13 @@ public class TimelineConsole implements Timeline {
      * @param currentTime
      * @return
      */
-    public Alarm getClosestTo(DateTime currentTime) {
-        return getFirstGreaterThan(currentTime);
+    public Optional<Alarm> getClosestTo(DateTime currentTime) {
+        Alarm found = getFirstGreaterThan(currentTime);
+        if (found == null) {
+            return Optional.absent();
+        } else {
+            return Optional.of(found);
+        }
     }
 
     public int getNumberOfAlarms() {

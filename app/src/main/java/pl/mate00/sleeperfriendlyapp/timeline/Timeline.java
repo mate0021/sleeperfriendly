@@ -1,5 +1,7 @@
 package pl.mate00.sleeperfriendlyapp.timeline;
 
+import com.google.common.base.Optional;
+
 import org.joda.time.DateTime;
 
 import java.util.Set;
@@ -20,12 +22,12 @@ public interface Timeline {
     /**
      * Returns alarm from timeline that is closest to, but greater than a given argument and is
      * enabled. If no such alarm is found, the first alarm from timeline is returned. If timeline
-     * is empty, return null.
+     * is empty, return empty Optional.
      *
      * @param currentTime
      * @return
      */
-    Alarm getClosestTo(DateTime currentTime);
+    Optional<Alarm> getClosestTo(DateTime currentTime);
 
     /**
      * Removes alarm from a timeline.

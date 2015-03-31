@@ -3,6 +3,8 @@ package pl.mate00.sleeperfriendlyapp.ui;
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
 
+import com.google.common.base.Optional;
+
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -66,10 +68,12 @@ public class UiCasesHandler {
     public void setAlarmEnabledTo(boolean isEnabled) {}
 
     private void registerClosestAlarm(DateTime currentTime) {
-        Alarm closest = timeline.getClosestTo(currentTime);
+        Optional<Alarm> closest = timeline.getClosestTo(currentTime);
         System.out.println(closest);
-        AlarmManagerMobile manager = new AlarmManagerMobile(context);
-        manager.updateWithClosestAlarm(closest);
+        if (closest.isPresent()) {
+            AlarmManagerMobile manager = new AlarmManagerMobile(context);
+            manager.updateWithClosestAlarm(closest.get());
+        }
     }
 
     private boolean insertOrRollBack(int hour, int minute, int[] days) {

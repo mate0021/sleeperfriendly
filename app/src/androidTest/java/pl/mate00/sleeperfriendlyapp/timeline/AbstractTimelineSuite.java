@@ -1,5 +1,7 @@
 package pl.mate00.sleeperfriendlyapp.timeline;
 
+import com.google.common.base.Optional;
+
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
@@ -33,7 +35,7 @@ public abstract class AbstractTimelineSuite {
 
     @Test
     public void timeLineIsEmpty() {
-        Assert.assertTrue(subject.isEmpty());
+        assertTrue(subject.isEmpty());
     }
 
     @Test
@@ -41,14 +43,14 @@ public abstract class AbstractTimelineSuite {
         Alarm a = anyAlarm();
         subject.addAlarm(a);
 
-        Assert.assertFalse(subject.isEmpty());
+        assertFalse(subject.isEmpty());
     }
 
     @Test
     public void getClosestAlarm_NoAlarmOnTimeline_ShouldReturnNull() {
-        Alarm result = subject.getClosestTo(anyDateTime());
+        Optional<Alarm> optionalResult = subject.getClosestTo(anyDateTime());
 
-        Assert.assertNull(result);
+        assertFalse(optionalResult.isPresent());
     }
 
     @Test
@@ -56,9 +58,10 @@ public abstract class AbstractTimelineSuite {
         Alarm a = anyAlarm();
         subject.addAlarm(a);
 
-        Alarm closest = subject.getClosestTo(anyDateTime());
+        Optional<Alarm> closest = subject.getClosestTo(anyDateTime());
+//        Alarm closest = subject.getClosestTo(anyDateTime());
 
-        Assert.assertEquals(a, closest);
+        assertEquals(a, closest.get());
     }
 
     @Test
@@ -70,9 +73,9 @@ public abstract class AbstractTimelineSuite {
 
         DateTime dt = new DateTime();
         dt = dt.withDayOfWeek(TUESDAY).withHourOfDay(10).withMinuteOfHour(00);
-        Alarm closestAlarm = subject.getClosestTo(dt);
+        Optional<Alarm> closestAlarm = subject.getClosestTo(dt);
 
-        Assert.assertEquals(closestAlarm, a2);
+        assertEquals(a2, closestAlarm.get());
     }
 
     @Test
@@ -84,9 +87,9 @@ public abstract class AbstractTimelineSuite {
 
         DateTime dt = new DateTime();
         dt = dt.withDayOfWeek(SUNDAY).withHourOfDay(23).withMinuteOfHour(59);
-        Alarm closestAlarm = subject.getClosestTo(dt);
+        Optional<Alarm> closestAlarm = subject.getClosestTo(dt);
 
-        Assert.assertEquals(a1, closestAlarm);
+        assertEquals(a1, closestAlarm.get());
     }
 
     @Test
@@ -101,9 +104,9 @@ public abstract class AbstractTimelineSuite {
         DateTime dt = new DateTime();
         dt = dt.withDayOfWeek(TUESDAY).withTime(14, 0, 0, 0);
 
-        Alarm closestAlarm = subject.getClosestTo(dt);
+        Optional<Alarm> closestAlarm = subject.getClosestTo(dt);
 
-        Assert.assertEquals(a3, closestAlarm);
+        assertEquals(a3, closestAlarm.get());
     }
 
     @Test
@@ -114,7 +117,7 @@ public abstract class AbstractTimelineSuite {
 
         int result = subject.getNumberOfAlarms();
 
-        Assert.assertEquals(3, result);
+        assertEquals(3, result);
     }
 
     @Test
@@ -122,7 +125,7 @@ public abstract class AbstractTimelineSuite {
         subject.addAlarm(anyAlarm());
         subject.removeAlarm(anyAlarm());
 
-        Assert.assertTrue(subject.isEmpty());
+        assertTrue(subject.isEmpty());
     }
 
     @Test
@@ -138,7 +141,7 @@ public abstract class AbstractTimelineSuite {
         subject.removeAlarm(a1);
 
         Alarm expectedAfterRemoval = new Alarm(Time.of(8, 15), FRIDAY);
-        Assert.assertEquals(expectedAfterRemoval, subject.getClosestTo(current));
+        assertEquals(expectedAfterRemoval, subject.getClosestTo(current).get());
     }
 
     @Test
@@ -168,7 +171,8 @@ public abstract class AbstractTimelineSuite {
 
         subject.addAlarm(a);
 
-        Assert.assertNull(subject.getClosestTo(anyDateTime()));
+        Optional<Alarm> result = subject.getClosestTo(anyDateTime());
+        assertFalse(result.isPresent());
     }
 
     @Test
@@ -192,9 +196,9 @@ public abstract class AbstractTimelineSuite {
         subject.addAlarm(enabledAlarm);
         DateTime current = new DateTime().withDayOfWeek(MONDAY).withTime(5, 0, 0, 0);
 
-        Alarm result = subject.getClosestTo(current);
+        Optional<Alarm> result = subject.getClosestTo(current);
 
-        Assert.assertEquals(enabledAlarm, result);
+        assertEquals(enabledAlarm, result.get());
     }
 
     @Test

@@ -1,5 +1,7 @@
 package pl.mate00.sleeperfriendlyapp.cases;
 
+import com.google.common.base.Optional;
+
 import org.joda.time.DateTime;
 
 import java.util.HashSet;
@@ -29,11 +31,13 @@ public class AddAlarmCase {
 
         System.out.println(timeline);
 
-        Alarm closest = getClosestAlarmTo(new DateTime().withDate(2015, 1, 28).withTime(10, 0, 0, 0));
+        Optional<Alarm> closest = getClosestAlarmTo(new DateTime().withDate(2015, 1, 28).withTime(10, 0, 0, 0));
 
         System.out.println(closest);
 
-        addClosestToAlarmManager(closest);
+        if (closest.isPresent()) {
+            addClosestToAlarmManager(closest.get());
+        }
 
         updateUIListOfAlarms(repeatableAlarm);
 
@@ -48,7 +52,7 @@ public class AddAlarmCase {
         // if different than current closest
     }
 
-    public static Alarm getClosestAlarmTo(DateTime current) {
+    public static Optional<Alarm> getClosestAlarmTo(DateTime current) {
         return timeline.getClosestTo(current);
     }
 
