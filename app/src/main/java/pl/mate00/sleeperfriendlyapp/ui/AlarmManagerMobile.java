@@ -15,6 +15,8 @@ import pl.mate00.sleeperfriendlyapp.timeline.Alarm;
  */
 public class AlarmManagerMobile {
 
+    private static final int REQUEST_ID = 0;
+
     private Context context;
 
     public AlarmManagerMobile(Context context) {
@@ -22,11 +24,21 @@ public class AlarmManagerMobile {
     }
 
     public void updateWithClosestAlarm(Alarm alarm) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alarm.toMillis(), getOperation());
+    }
+
+    public void cancelClosestAlarm() {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(getOperation());
+    }
+
+    private PendingIntent getOperation() {
         Intent alarmIntent = new Intent(context, NextAlarmReceiver.class);
         alarmIntent.setAction("ALARM_ACTION");
-        PendingIntent operation = PendingIntent.getBroadcast(context, 0, alarmIntent, 0);
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, alarm.toMillis(), operation);
+        PendingIntent result = PendingIntent.getBroadcast(context, REQUEST_ID, alarmIntent, PendingIntent.FLAG_ONE_SHOT);
+
+        return result;
     }
 
 }

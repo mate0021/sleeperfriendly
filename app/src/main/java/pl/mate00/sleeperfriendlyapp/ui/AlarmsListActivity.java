@@ -33,7 +33,7 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
     private List<RepeatableAlarm> uiAlarms = new ArrayList<>();
 
 //    private AddAlarmProxy uiHandler;
-    private DeleteAlarmProxy deleteAlarmUiHandler;
+//    private DeleteAlarmProxy deleteAlarmUiHandler;
     private UiAlarmState uiListHandler;
 
     private UiCasesHandler uiCasesHandler;
@@ -46,11 +46,12 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
 //        uiHandler = new AddAlarmProxy(this);
 //        deleteAlarmUiHandler = new DeleteAlarmProxy(this);
 //
-//        uiHandler.setListenerUi(this);
-//        deleteAlarmUiHandler.setListenerUi(this);
+//        uiHandler.setUiListener(this);
+//        deleteAlarmUiHandler.setUiListener(this);
 
         uiCasesHandler = new UiCasesHandler(this);
-        uiCasesHandler.setListenerUi(this);
+        uiCasesHandler.setUiListener(this);
+
         uiListHandler = new UiAlarmState(this);
 
         uiAlarms = restoreListOfAlarms();

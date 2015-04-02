@@ -32,7 +32,7 @@ public class UiCasesHandler {
         timeline = new TimelineDb(context);
     }
 
-    public void setListenerUi(UiCallbacks listenerUi) {
+    public void setUiListener(UiCallbacks listenerUi) {
         this.listenerUi = listenerUi;
     }
 
@@ -69,10 +69,11 @@ public class UiCasesHandler {
 
     private void registerClosestAlarm(DateTime currentTime) {
         Optional<Alarm> closest = timeline.getClosestTo(currentTime);
-        System.out.println(closest);
+        AlarmManagerMobile manager = new AlarmManagerMobile(context);
         if (closest.isPresent()) {
-            AlarmManagerMobile manager = new AlarmManagerMobile(context);
             manager.updateWithClosestAlarm(closest.get());
+        } else {
+            manager.cancelClosestAlarm();
         }
     }
 
