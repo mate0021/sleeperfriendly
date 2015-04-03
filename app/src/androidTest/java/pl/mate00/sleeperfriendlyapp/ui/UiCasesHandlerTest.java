@@ -184,6 +184,41 @@ public class UiCasesHandlerTest {
         assertScheduledAlarmEquals(FRIDAY,  8, 0);
     }
 
+    @Test
+    public void disabling_AddTwoAlarms_DisableEarlier_ShouldScheduleLater() {
+        subject.addAlarm(8, 0, new int[] {THURSDAY}, currentWednesday10Am);
+        subject.addAlarm(8, 0, new int[] {FRIDAY}, currentWednesday10Am);
+
+        RepeatableAlarm alarmToDisable = new RepeatableAlarm(Time.of(8, 0), new int[] {THURSDAY});
+        subject.setAlarmEnabledTo(alarmToDisable, false);
+
+        assertScheduledAlarmEquals(FRIDAY, 8, 0);
+    }
+
+    @Test
+    public void enabling_AddTwoAlarms_DisableEarlier_EnableEarlier_ShouldScheduleEarlier() {
+        subject.addAlarm(8, 0, new int[] {THURSDAY}, currentWednesday10Am);
+        subject.addAlarm(8, 0, new int[] {FRIDAY}, currentWednesday10Am);
+
+        RepeatableAlarm alarmToChange = new RepeatableAlarm(Time.of(8, 0), new int[] {THURSDAY});
+        subject.setAlarmEnabledTo(alarmToChange, false);
+
+        subject.setAlarmEnabledTo(alarmToChange, true);
+
+        assertScheduledAlarmEquals(THURSDAY, 8, 0);
+    }
+
+    @Test
+    public void disableAllAlarms_ShouldNotScheduleAnything() {
+        subject.addAlarm(8, 0, new int[] {THURSDAY}, currentWednesday10Am);
+        subject.addAlarm(8, 0, new int[] {FRIDAY}, currentWednesday10Am);
+
+        subject.setAlarmEnabledTo(new RepeatableAlarm(Time.of(8, 0), new int[] {THURSDAY}), false);
+        subject.setAlarmEnabledTo(new RepeatableAlarm(Time.of(8, 0), new int[] {FRIDAY}), false);
+
+        assertNull(shadowAlarmManager.getNextScheduledAlarm());
+    }
+
     private void assertScheduledAlarmEquals(int day, int hour, int minute) {
         ScheduledAlarm scheduledAlarm = shadowAlarmManager.getNextScheduledAlarm();
         DateTime alarmTime = new DateTime().withMillis(scheduledAlarm.triggerAtTime);

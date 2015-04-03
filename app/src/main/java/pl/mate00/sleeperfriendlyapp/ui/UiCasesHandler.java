@@ -65,7 +65,13 @@ public class UiCasesHandler {
         registerClosestAlarm(current);
     }
 
-    public void setAlarmEnabledTo(boolean isEnabled) {}
+    public void setAlarmEnabledTo(RepeatableAlarm repeatableAlarm, boolean isEnabled) {
+        for (Alarm alarm : repeatableAlarm.breakIntoPieces()) {
+            timeline.removeAlarm(alarm);
+            alarm.setEnabled(isEnabled);
+            timeline.addAlarm(alarm);
+        }
+    }
 
     private void registerClosestAlarm(DateTime currentTime) {
         Optional<Alarm> closest = timeline.getClosestTo(currentTime);

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -128,7 +129,10 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d(TAG, "onItemClick " + adapter.getItem(position));
+        RepeatableAlarm alarm = adapter.getItem(position);
+        CheckBox cbIsEnabled = (CheckBox) view.findViewById(R.id.is_enabled);
+        boolean isEnabled = !cbIsEnabled.isChecked();
+        uiCasesHandler.setAlarmEnabledTo(alarm, isEnabled);
     }
 
 }
