@@ -190,7 +190,7 @@ public class UiCasesHandlerTest {
         subject.addAlarm(8, 0, new int[] {FRIDAY}, currentWednesday10Am);
 
         RepeatableAlarm alarmToDisable = new RepeatableAlarm(Time.of(8, 0), new int[] {THURSDAY});
-        subject.setAlarmEnabledTo(alarmToDisable, false);
+        subject.setAlarmEnabledTo(false, alarmToDisable, currentWednesday10Am);
 
         assertScheduledAlarmEquals(FRIDAY, 8, 0);
     }
@@ -201,9 +201,9 @@ public class UiCasesHandlerTest {
         subject.addAlarm(8, 0, new int[] {FRIDAY}, currentWednesday10Am);
 
         RepeatableAlarm alarmToChange = new RepeatableAlarm(Time.of(8, 0), new int[] {THURSDAY});
-        subject.setAlarmEnabledTo(alarmToChange, false);
+        subject.setAlarmEnabledTo(false, alarmToChange, currentWednesday10Am);
 
-        subject.setAlarmEnabledTo(alarmToChange, true);
+        subject.setAlarmEnabledTo(true, alarmToChange, currentWednesday10Am);
 
         assertScheduledAlarmEquals(THURSDAY, 8, 0);
     }
@@ -213,8 +213,8 @@ public class UiCasesHandlerTest {
         subject.addAlarm(8, 0, new int[] {THURSDAY}, currentWednesday10Am);
         subject.addAlarm(8, 0, new int[] {FRIDAY}, currentWednesday10Am);
 
-        subject.setAlarmEnabledTo(new RepeatableAlarm(Time.of(8, 0), new int[] {THURSDAY}), false);
-        subject.setAlarmEnabledTo(new RepeatableAlarm(Time.of(8, 0), new int[] {FRIDAY}), false);
+        subject.setAlarmEnabledTo(false, new RepeatableAlarm(Time.of(8, 0), new int[] {THURSDAY}), currentWednesday10Am);
+        subject.setAlarmEnabledTo(false, new RepeatableAlarm(Time.of(8, 0), new int[] {FRIDAY}), currentWednesday10Am);
 
         assertNull(shadowAlarmManager.getNextScheduledAlarm());
     }

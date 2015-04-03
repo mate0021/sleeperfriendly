@@ -132,7 +132,8 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
         RepeatableAlarm alarm = adapter.getItem(position);
         CheckBox cbIsEnabled = (CheckBox) view.findViewById(R.id.is_enabled);
         boolean isEnabled = !cbIsEnabled.isChecked();
-        uiCasesHandler.setAlarmEnabledTo(alarm, isEnabled);
+        DateTime current = new DateTime();
+        uiCasesHandler.setAlarmEnabledTo(isEnabled, alarm, current);
     }
 
 }
