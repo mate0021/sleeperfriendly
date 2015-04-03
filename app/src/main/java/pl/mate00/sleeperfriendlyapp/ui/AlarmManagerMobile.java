@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import org.joda.time.DateTime;
 
@@ -15,6 +16,8 @@ import pl.mate00.sleeperfriendlyapp.timeline.Alarm;
  */
 public class AlarmManagerMobile {
 
+    private static final String TAG = AlarmManagerMobile.class.getSimpleName();
+
     private static final int REQUEST_ID = 0;
 
     private Context context;
@@ -24,6 +27,7 @@ public class AlarmManagerMobile {
     }
 
     public void updateWithClosestAlarm(Alarm alarm) {
+        Log.d(TAG, "Now closest alarm is " + alarm);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, alarm.toMillis(), getOperation());
     }

@@ -57,6 +57,16 @@ public class AlarmItemAdapter extends ArrayAdapter<RepeatableAlarm> {
         return row;
     }
 
+    @Override
+    public boolean areAllItemsEnabled() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return true;
+    }
+
     static class RepeatableAlarmHolder {
         CheckBox chBoxIsEnabled;
         TextView txtClock;

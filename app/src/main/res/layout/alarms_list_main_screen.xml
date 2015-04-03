@@ -10,7 +10,8 @@
     android:id="@+id/alarms_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_above="@+id/btn_new_alarm"/>
+    android:layout_above="@+id/btn_new_alarm"
+    android:layout_alignParentTop="true" />
 
 <Button
     android:id="@+id/btn_new_alarm"

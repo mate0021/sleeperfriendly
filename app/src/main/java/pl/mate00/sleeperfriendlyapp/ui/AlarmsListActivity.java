@@ -3,11 +3,14 @@ package pl.mate00.sleeperfriendlyapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.internal.view.menu.ListMenuPresenter;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -21,7 +24,9 @@ import java.util.List;
 import pl.mate00.sleeperfriendlyapp.R;
 import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
 
-public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks {
+public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks, AdapterView.OnItemClickListener {
+
+    private static final String TAG = AlarmsListActivity.class.getSimpleName();
 
     static final int ALARM_TIME_REQUEST = 1;
     static final String ALARM_RESULT_HOUR = "ui_hour";
@@ -32,8 +37,6 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
     private ArrayAdapter<RepeatableAlarm> adapter;
     private List<RepeatableAlarm> uiAlarms = new ArrayList<>();
 
-//    private AddAlarmProxy uiHandler;
-//    private DeleteAlarmProxy deleteAlarmUiHandler;
     private UiAlarmState uiListHandler;
 
     private UiCasesHandler uiCasesHandler;
@@ -43,11 +46,6 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarms_list_main_screen);
-//        uiHandler = new AddAlarmProxy(this);
-//        deleteAlarmUiHandler = new DeleteAlarmProxy(this);
-//
-//        uiHandler.setUiListener(this);
-//        deleteAlarmUiHandler.setUiListener(this);
 
         uiCasesHandler = new UiCasesHandler(this);
         uiCasesHandler.setUiListener(this);
@@ -59,6 +57,8 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
 
         alarmsList = (ListView) findViewById(R.id.alarms_list);
         alarmsList.setAdapter(adapter);
+        alarmsList.setClickable(true);
+        alarmsList.setOnItemClickListener(this);
 
         registerForContextMenu(alarmsList);
     }
@@ -76,7 +76,6 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
     }
 
     private void deleteAlarm(RepeatableAlarm alarm) {
-//        deleteAlarmUiHandler.deleteAlarm(alarm);
         DateTime current = new DateTime();
         uiCasesHandler.deleteAlarm(alarm, current);
     }
@@ -96,7 +95,6 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
 
             DateTime current = new DateTime();
             uiCasesHandler.addAlarm(hour, minute, days, current);
-//            uiHandler.addRepeatableAlarm(hour, minute, days, current);
         }
     }
 
@@ -127,4 +125,10 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
     public void onErrorAfterDelete(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d(TAG, "onItemClick " + adapter.getItem(position));
+    }
+
 }
