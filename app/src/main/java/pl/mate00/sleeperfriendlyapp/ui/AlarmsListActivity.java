@@ -134,6 +134,8 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
         boolean isEnabled = !cbIsEnabled.isChecked();
         DateTime current = new DateTime();
         uiCasesHandler.setAlarmEnabledTo(isEnabled, alarm, current);
+        cbIsEnabled.setChecked(isEnabled);
+        // store ui state
     }
 
 }
