@@ -128,6 +128,13 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
     }
 
     @Override
+    public void onUpdateAfterSwitching(RepeatableAlarm alarm) {
+        System.out.println("Will update with " + alarm);
+        uiListHandler.deleteUiAlarm(alarm);
+        uiListHandler.addUiAlarm(alarm);
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         RepeatableAlarm alarm = adapter.getItem(position);
         CheckBox cbIsEnabled = (CheckBox) view.findViewById(R.id.is_enabled);

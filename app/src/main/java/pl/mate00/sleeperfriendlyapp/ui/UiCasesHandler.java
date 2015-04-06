@@ -72,6 +72,8 @@ public class UiCasesHandler {
             timeline.addAlarm(alarm);
         }
         registerClosestAlarm(current);
+        repeatableAlarm.setEnabled(isEnabled);
+        listenerUi.onUpdateAfterSwitching(repeatableAlarm);
     }
 
     private void registerClosestAlarm(DateTime currentTime) {

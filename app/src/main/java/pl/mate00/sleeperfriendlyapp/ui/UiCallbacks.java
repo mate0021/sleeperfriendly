@@ -14,4 +14,6 @@ public interface UiCallbacks {
     void onErrorAfterAdding(String message);
 
     void onErrorAfterDelete(String message);
+
+    void onUpdateAfterSwitching(RepeatableAlarm alarm);
 }
