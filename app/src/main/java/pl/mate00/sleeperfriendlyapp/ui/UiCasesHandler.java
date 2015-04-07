@@ -80,7 +80,8 @@ public class UiCasesHandler {
         Optional<Alarm> closest = timeline.getClosestTo(currentTime);
         AlarmManagerMobile manager = new AlarmManagerMobile(context);
         if (closest.isPresent()) {
-            manager.updateWithClosestAlarm(closest.get());
+            Alarm closestAlarm = closest.get();
+            manager.updateWithClosestAlarm(closestAlarm);
         } else {
             manager.cancelClosestAlarm();
         }

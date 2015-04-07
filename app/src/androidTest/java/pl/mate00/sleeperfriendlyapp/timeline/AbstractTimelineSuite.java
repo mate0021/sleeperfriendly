@@ -47,7 +47,7 @@ public abstract class AbstractTimelineSuite {
     }
 
     @Test
-    public void getClosestAlarm_NoAlarmOnTimeline_ShouldReturnNull() {
+    public void getClosestAlarm_NoAlarmOnTimeline_ShouldReturnEmptyOptional() {
         Optional<Alarm> optionalResult = subject.getClosestTo(anyDateTime());
 
         assertFalse(optionalResult.isPresent());
@@ -59,7 +59,6 @@ public abstract class AbstractTimelineSuite {
         subject.addAlarm(a);
 
         Optional<Alarm> closest = subject.getClosestTo(anyDateTime());
-//        Alarm closest = subject.getClosestTo(anyDateTime());
 
         assertEquals(a, closest.get());
     }
@@ -165,7 +164,7 @@ public abstract class AbstractTimelineSuite {
     }
 
     @Test
-    public void getClosestAlarm_OneDisabledAlarm_ShouldReturnNull() {
+    public void getClosestAlarm_OneDisabledAlarm_ShouldReturnEmptyOptional() {
         Alarm a = anyAlarm();
         a.setEnabled(false);
 

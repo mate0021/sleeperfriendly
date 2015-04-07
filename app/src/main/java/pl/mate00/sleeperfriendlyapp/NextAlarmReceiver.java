@@ -29,7 +29,7 @@ public class NextAlarmReceiver extends BroadcastReceiver {
         Optional<Alarm> nextAlarm = timeline.getClosestTo(new DateTime());
         if (nextAlarm.isPresent()) {
             AlarmManagerMobile alarmManager = new AlarmManagerMobile(context);
-            alarmManager.updateWithClosestAlarm(nextAlarm.get());
+//            alarmManager.updateWithClosestAlarm(nextAlarm.get());
         }
     }
 }

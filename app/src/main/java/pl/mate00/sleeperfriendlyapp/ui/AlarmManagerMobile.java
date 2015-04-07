@@ -27,7 +27,13 @@ public class AlarmManagerMobile {
     }
 
     public void updateWithClosestAlarm(Alarm alarm) {
-        Log.d(TAG, "Now closest alarm is " + alarm);
+        System.out.println(alarm.isLaterThan(new DateTime()));
+        long alarmMillis = alarm.toMillis();
+        if (!alarm.isLaterThan(new DateTime())) {
+            DateTime dateTime = new DateTime().withMillis(alarmMillis).plusWeeks(1);
+            alarmMillis = dateTime.getMillis();
+        }
+        Log.d(TAG, "Now closest alarm is " + new DateTime().withMillis(alarm.toMillis()));
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, alarm.toMillis(), getOperation());
     }
