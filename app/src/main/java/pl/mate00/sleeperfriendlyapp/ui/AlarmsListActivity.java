@@ -67,7 +67,7 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
     @Override
     public void onCreateContextMenu(ContextMenu menu,  View view,  ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, view, menuInfo);
-        MenuInflater inflater = getMenuInflater();
+        MenuInflater inflater = new MenuInflater(this);
         inflater.inflate(R.menu.menu_alarm_item, menu);
     }
 
