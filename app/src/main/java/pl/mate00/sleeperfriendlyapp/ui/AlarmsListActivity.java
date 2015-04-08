@@ -129,7 +129,6 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
 
     @Override
     public void onUpdateAfterSwitching(RepeatableAlarm alarm) {
-        System.out.println("Will update with " + alarm);
         uiListHandler.deleteUiAlarm(alarm);
         uiListHandler.addUiAlarm(alarm);
     }

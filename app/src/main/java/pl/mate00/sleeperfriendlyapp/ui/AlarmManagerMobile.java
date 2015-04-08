@@ -27,15 +27,10 @@ public class AlarmManagerMobile {
     }
 
     public void updateWithClosestAlarm(Alarm alarm) {
-        System.out.println(alarm.isLaterThan(new DateTime()));
-        long alarmMillis = alarm.toMillis();
-        if (!alarm.isLaterThan(new DateTime())) {
-            DateTime dateTime = new DateTime().withMillis(alarmMillis).plusWeeks(1);
-            alarmMillis = dateTime.getMillis();
-        }
-        Log.d(TAG, "Now closest alarm is " + new DateTime().withMillis(alarm.toMillis()));
+        long alarmMillis = toNextWeekIfEarlierThanCurrent(alarm);
+        Log.d(TAG, "Now closest alarm is " + new DateTime().withMillis(alarmMillis));
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, alarm.toMillis(), getOperation());
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmMillis, getOperation());
     }
 
     public void cancelClosestAlarm() {
@@ -47,6 +42,17 @@ public class AlarmManagerMobile {
         Intent alarmIntent = new Intent(context, NextAlarmReceiver.class);
         alarmIntent.setAction("ALARM_ACTION");
         PendingIntent result = PendingIntent.getBroadcast(context, REQUEST_ID, alarmIntent, PendingIntent.FLAG_ONE_SHOT);
+
+        return result;
+    }
+
+    private long toNextWeekIfEarlierThanCurrent(Alarm alarm) {
+        long result = alarm.toMillis();
+
+        if (!alarm.isLaterThan(new DateTime())) {
+            DateTime dateTime = new DateTime().withMillis(result).plusWeeks(1);
+            result = dateTime.getMillis();
+        }
 
         return result;
     }
