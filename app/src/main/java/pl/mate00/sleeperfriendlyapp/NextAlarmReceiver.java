@@ -16,20 +16,35 @@ import pl.mate00.sleeperfriendlyapp.timeline.db.TimelineDb;
 import pl.mate00.sleeperfriendlyapp.ui.AlarmManagerMobile;
 
 public class NextAlarmReceiver extends BroadcastReceiver {
+
     private static final String TAG = NextAlarmReceiver.class.getSimpleName();
+
+    private Context context;
 
     public NextAlarmReceiver() {
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG, "alarm fired");
+        if (!intent.getAction().equals("ALARM_ACTION")) {
+            return;
+        }
+
+        this.context = context;
+        DateTime current = new DateTime();
+        Log.d(TAG, "Alarm fired at " + current);
+
         Toast.makeText(context, "Alarm", Toast.LENGTH_LONG).show();
+
+        updateWithNextAlarm(current);
+    }
+
+    private void updateWithNextAlarm(DateTime current) {
         Timeline timeline = new TimelineDb(context);
-        Optional<Alarm> nextAlarm = timeline.getClosestTo(new DateTime());
+        Optional<Alarm> nextAlarm = timeline.getClosestTo(current);
         if (nextAlarm.isPresent()) {
             AlarmManagerMobile alarmManager = new AlarmManagerMobile(context);
-//            alarmManager.updateWithClosestAlarm(nextAlarm.get());
+            alarmManager.updateWithClosestAlarm(nextAlarm.get());
         }
     }
 }
