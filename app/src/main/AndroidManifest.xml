@@ -31,8 +31,12 @@
         </receiver>
 
         <activity
-            android:name=".ui.DialogLauncher"
-            android:label="@string/title_activity_dialog_launcher" >
+            android:name=".ui.dialog.DialogLauncher"
+            android:label="@string/title_activity_dialog_launcher"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
     </application>
 

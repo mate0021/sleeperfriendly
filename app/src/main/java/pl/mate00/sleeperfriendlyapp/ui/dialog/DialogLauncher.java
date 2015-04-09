@@ -1,16 +1,13 @@
-package pl.mate00.sleeperfriendlyapp.ui;
+package pl.mate00.sleeperfriendlyapp.ui.dialog;
 
 import static android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
-import android.app.ActionBar;
-import android.nfc.Tag;
+
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import pl.mate00.sleeperfriendlyapp.R;
+import pl.mate00.sleeperfriendlyapp.ui.AlarmReactionListener;
 
 public class DialogLauncher extends FragmentActivity implements AlarmReactionListener {
 

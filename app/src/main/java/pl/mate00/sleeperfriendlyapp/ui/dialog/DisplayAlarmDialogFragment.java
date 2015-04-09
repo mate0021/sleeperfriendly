@@ -1,4 +1,4 @@
-package pl.mate00.sleeperfriendlyapp.ui;
+package pl.mate00.sleeperfriendlyapp.ui.dialog;
 
 import static android.os.PowerManager.*;
 
@@ -11,6 +11,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.util.Log;
+
+import pl.mate00.sleeperfriendlyapp.ui.AlarmReactionListener;
 
 /**
  * Created by mamy on 08.04.15.

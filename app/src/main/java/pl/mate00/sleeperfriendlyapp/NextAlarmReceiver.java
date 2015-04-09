@@ -1,11 +1,9 @@
 package pl.mate00.sleeperfriendlyapp;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.common.base.Optional;
 
@@ -16,8 +14,7 @@ import pl.mate00.sleeperfriendlyapp.timeline.Timeline;
 import pl.mate00.sleeperfriendlyapp.timeline.db.TimelineDb;
 import pl.mate00.sleeperfriendlyapp.ui.AlarmManagerMobile;
 import pl.mate00.sleeperfriendlyapp.ui.AlarmReaction;
-import pl.mate00.sleeperfriendlyapp.ui.DialogLauncher;
-import pl.mate00.sleeperfriendlyapp.ui.ToastReaction;
+import pl.mate00.sleeperfriendlyapp.ui.dialog.SimpleDialogAlarmReaction;
 
 public class NextAlarmReceiver extends BroadcastReceiver {
 
@@ -28,7 +25,7 @@ public class NextAlarmReceiver extends BroadcastReceiver {
     private AlarmReaction alarmReaction;
 
     public NextAlarmReceiver() {
-        alarmReaction = new ToastReaction();
+        alarmReaction = new SimpleDialogAlarmReaction();
     }
 
     @Override
@@ -42,10 +39,6 @@ public class NextAlarmReceiver extends BroadcastReceiver {
         Log.d(TAG, " [][][] Alarm fired at " + current);
 
         alarmReaction.onAlarmFired(context);
-
-        Intent intent1 = new Intent(context, DialogLauncher.class);
-        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent1);
 
         updateWithNextAlarm(current);
     }
