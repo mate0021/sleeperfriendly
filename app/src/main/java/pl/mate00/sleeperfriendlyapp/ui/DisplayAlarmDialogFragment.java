@@ -1,11 +1,15 @@
 package pl.mate00.sleeperfriendlyapp.ui;
 
+import static android.os.PowerManager.*;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.util.Log;
 
 /**
@@ -16,6 +20,8 @@ public class DisplayAlarmDialogFragment extends DialogFragment {
     private static final String TAG = DisplayAlarmDialogFragment.class.getSimpleName();
 
     private AlarmReactionListener listener;
+
+    private PowerManager.WakeLock wakeLock;
 
     private DialogInterface.OnClickListener positiveClickListener = new DialogInterface.OnClickListener() {
         @Override
@@ -41,6 +47,7 @@ public class DisplayAlarmDialogFragment extends DialogFragment {
                 .setPositiveButton("Positive", positiveClickListener)
                 .setNegativeButton("Negative", negativeClickListener);
 
+        aquireWakeLock();
 
         return alertDialogBuilder.create();
     }
@@ -56,5 +63,16 @@ public class DisplayAlarmDialogFragment extends DialogFragment {
     public void onDismiss(DialogInterface dialogInterface) {
         super.onDismiss(dialogInterface);
         Log.d(TAG, "[][][] dismissing");
+        releaseWakeLock();
+    }
+
+    private void aquireWakeLock() {
+        PowerManager powerManager = (PowerManager) getActivity().getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(SCREEN_DIM_WAKE_LOCK | ACQUIRE_CAUSES_WAKEUP | ON_AFTER_RELEASE, TAG);
+        wakeLock.acquire();
+    }
+
+    private void releaseWakeLock() {
+        wakeLock.release();
     }
 }
