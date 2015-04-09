@@ -1,13 +1,13 @@
 package pl.mate00.sleeperfriendlyapp.ui.dialog;
 
-import static android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
-
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import pl.mate00.sleeperfriendlyapp.R;
 import pl.mate00.sleeperfriendlyapp.ui.AlarmReactionListener;
+
+import static android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
 
 public class DialogLauncher extends FragmentActivity implements AlarmReactionListener {
 

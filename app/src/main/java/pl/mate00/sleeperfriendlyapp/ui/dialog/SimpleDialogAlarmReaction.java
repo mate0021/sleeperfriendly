@@ -2,7 +2,6 @@ package pl.mate00.sleeperfriendlyapp.ui.dialog;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 
 import pl.mate00.sleeperfriendlyapp.ui.AlarmReaction;
 

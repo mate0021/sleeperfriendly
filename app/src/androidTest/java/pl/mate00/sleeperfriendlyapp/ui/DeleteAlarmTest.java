@@ -1,9 +1,5 @@
 package pl.mate00.sleeperfriendlyapp.ui;
 
-import static org.robolectric.Robolectric.*;
-import static android.app.Activity.RESULT_OK;
-import static org.junit.Assert.*;
-
 import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,8 +14,11 @@ import org.robolectric.annotation.Config;
 import org.robolectric.tester.android.view.TestMenuItem;
 
 import pl.mate00.sleeperfriendlyapp.R;
-import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
-import pl.mate00.sleeperfriendlyapp.timeline.Time;
+
+import static android.app.Activity.RESULT_OK;
+import static org.junit.Assert.assertEquals;
+import static org.robolectric.Robolectric.buildActivity;
+import static org.robolectric.Robolectric.shadowOf;
 
 /**
  * Created by mamy on 25.02.15.

@@ -1,7 +1,5 @@
 package pl.mate00.sleeperfriendlyapp.ui.dialog;
 
-import static android.os.PowerManager.*;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,6 +11,10 @@ import android.os.PowerManager;
 import android.util.Log;
 
 import pl.mate00.sleeperfriendlyapp.ui.AlarmReactionListener;
+
+import static android.os.PowerManager.ACQUIRE_CAUSES_WAKEUP;
+import static android.os.PowerManager.ON_AFTER_RELEASE;
+import static android.os.PowerManager.SCREEN_DIM_WAKE_LOCK;
 
 /**
  * Created by mamy on 08.04.15.
