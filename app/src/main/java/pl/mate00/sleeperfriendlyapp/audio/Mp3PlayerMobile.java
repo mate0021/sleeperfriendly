@@ -40,6 +40,7 @@ public class Mp3PlayerMobile implements Mp3Player, MediaPlayer.OnPreparedListene
         try {
             mediaPlayer.setDataSource(MP3_TRACK);
             mediaPlayer.prepareAsync();
+            mediaPlayer.setLooping(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
