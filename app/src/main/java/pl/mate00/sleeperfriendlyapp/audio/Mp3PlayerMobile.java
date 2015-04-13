@@ -17,6 +17,8 @@ public class Mp3PlayerMobile implements Mp3Player, MediaPlayer.OnPreparedListene
 
     private static final String MP3_TRACK = SDCARD_PATH + "/mp3/miami.mp3";
 
+    private static Mp3Player instance;
+
     private MediaPlayer mediaPlayer;
 
     private Context context;
@@ -24,15 +26,28 @@ public class Mp3PlayerMobile implements Mp3Player, MediaPlayer.OnPreparedListene
     public Mp3PlayerMobile() {
     }
 
-    public Mp3PlayerMobile(Context context) {
+
+    public static Mp3Player getInstance(Context context) {
+        if (instance == null) {
+            instance = new Mp3PlayerMobile(context);
+        }
+
+        return instance;
+    }
+
+    private Mp3PlayerMobile(Context context) {
         System.out.println("[][][] Mp3Constructor ");
         this.context = context;
+        mediaPlayer = new MediaPlayer();
     }
 
     @Override
     public void play() {
         Log.d(TAG, "[][][] Playing some stuff");
-        mediaPlayer = new MediaPlayer();
+        if (mediaPlayer.isPlaying()) {
+            Log.d(TAG, "[][][] already playing");
+            return;
+        }
         mediaPlayer.setOnPreparedListener(this);
         mediaPlayer.setOnCompletionListener(this);
         mediaPlayer.setOnErrorListener(this);
@@ -70,7 +85,7 @@ public class Mp3PlayerMobile implements Mp3Player, MediaPlayer.OnPreparedListene
 
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
-        System.out.println("[][][] mp = [" + mp + "], what = [" + what + "], extra = [" + extra + "]");
+        Log.d(TAG, "[][][] mp = [" + mp + "], what = [" + what + "], extra = [" + extra + "]");
         return false;
     }
 }
