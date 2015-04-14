@@ -59,27 +59,13 @@ public class DisplayAlarmDialogFragment extends DialogFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        Log.d(TAG, "[][][] attaching");
         listener = (AlarmReactionListener) activity;
     }
 
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
         super.onDismiss(dialogInterface);
-        Log.d(TAG, "[][][] dismissing");
         releaseWakeLock();
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d(TAG, "DADF onActivityCreated");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "DADF onStart");
     }
 
     private void aquireWakeLock() {
