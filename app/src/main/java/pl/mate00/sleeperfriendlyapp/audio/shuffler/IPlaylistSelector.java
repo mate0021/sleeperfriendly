@@ -1,4 +1,4 @@
-package pl.mate00.sleeperfriendlyapp.db;
+package pl.mate00.sleeperfriendlyapp.audio.shuffler;
 
 import java.util.List;
 

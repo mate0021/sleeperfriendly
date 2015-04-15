@@ -4,21 +4,17 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.COLUMN_ID;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.COLUMN_PATH;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.COLUMN_PLAYED;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.DB_FILE_TRACKS;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.TABLE_NAME;
+
 public class PlaylistDbHandler extends SQLiteOpenHelper {
 
     private static final String TAG = PlaylistDbHandler.class.getSimpleName();
 
-    public static final String DB_NAME = "sleeper_friendly.db";
-
     public static final int VERSION = 1;
-
-    public static final String TABLE_NAME = "played_mp3";
-
-    public static final String COLUMN_ID = "_id";
-
-    public static final String COLUMN_PATH = "path";
-
-    public static final String COLUMN_PLAYED = "played";
 
     private static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" +
             COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -27,7 +23,7 @@ public class PlaylistDbHandler extends SQLiteOpenHelper {
             ");";
 
     public PlaylistDbHandler(Context context) {
-        super(context, DB_NAME, null, VERSION);
+        super(context, DB_FILE_TRACKS, null, VERSION);
     }
 
     @Override

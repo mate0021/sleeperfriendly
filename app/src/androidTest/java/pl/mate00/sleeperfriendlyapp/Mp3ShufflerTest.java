@@ -2,7 +2,8 @@ package pl.mate00.sleeperfriendlyapp;
 
 import org.junit.Test;
 
-import pl.mate00.sleeperfriendlyapp.db.IPlaylistSelector;
+import pl.mate00.sleeperfriendlyapp.audio.shuffler.IPlaylistSelector;
+import pl.mate00.sleeperfriendlyapp.audio.shuffler.Mp3Shuffler;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

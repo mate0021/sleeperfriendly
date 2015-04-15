@@ -31,4 +31,13 @@ public final class DbConstants {
         public static final String COL_DAYS = "days";
         public static final String COL_ENABLED = "enabled";
     }
+
+    public static abstract class TrackPath {
+        public static final String DB_FILE_TRACKS = "mp3_tracks.db";
+
+        public static final String TABLE_NAME = "played_mp3";
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_PATH = "path";
+        public static final String COLUMN_PLAYED = "played";
+    }
 }

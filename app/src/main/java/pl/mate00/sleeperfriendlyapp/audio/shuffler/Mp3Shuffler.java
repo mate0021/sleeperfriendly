@@ -1,11 +1,8 @@
-package pl.mate00.sleeperfriendlyapp;
+package pl.mate00.sleeperfriendlyapp.audio.shuffler;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import pl.mate00.sleeperfriendlyapp.db.IPlaylistSelector;
-import pl.mate00.sleeperfriendlyapp.db.PathEntity;
 
 public class Mp3Shuffler {
 

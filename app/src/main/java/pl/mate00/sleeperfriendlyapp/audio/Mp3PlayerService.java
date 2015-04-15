@@ -4,8 +4,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Environment;
 import android.os.IBinder;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -56,6 +56,7 @@ public class Mp3PlayerService extends Service implements MediaPlayer.OnPreparedL
         if (mediaPlayer.isPlaying()) {
             return;
         }
+        Log.d(TAG, "[][][] Playing track " + track);
         mediaPlayer.setOnPreparedListener(this);
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {

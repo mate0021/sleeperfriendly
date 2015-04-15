@@ -3,8 +3,8 @@ package pl.mate00.sleeperfriendlyapp;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.mate00.sleeperfriendlyapp.db.IPlaylistSelector;
-import pl.mate00.sleeperfriendlyapp.db.PathEntity;
+import pl.mate00.sleeperfriendlyapp.audio.shuffler.IPlaylistSelector;
+import pl.mate00.sleeperfriendlyapp.audio.shuffler.PathEntity;
 
 public class AllUnplayedSelector implements IPlaylistSelector {
 	
