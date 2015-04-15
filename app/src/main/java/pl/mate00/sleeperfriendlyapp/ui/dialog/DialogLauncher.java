@@ -1,6 +1,7 @@
 package pl.mate00.sleeperfriendlyapp.ui.dialog;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 
 import pl.mate00.sleeperfriendlyapp.R;
@@ -14,6 +15,10 @@ public class DialogLauncher extends FragmentActivity implements AlarmReactionLis
 
     private static final String TAG = DialogLauncher.class.getSimpleName();
 
+    private static final String SDCARD_PATH = Environment.getExternalStorageDirectory().getPath();
+
+    private static final String MP3_TRACK = SDCARD_PATH + "/mp3/miami.mp3";
+
     private Mp3Player player = new Mp3ServiceLauncher(this);
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +28,7 @@ public class DialogLauncher extends FragmentActivity implements AlarmReactionLis
         DisplayAlarmDialogFragment alarmDialog = new DisplayAlarmDialogFragment();
         alarmDialog.show(getFragmentManager(), TAG);
 
-        player.play();
+        player.play(MP3_TRACK);
     }
 
     @Override

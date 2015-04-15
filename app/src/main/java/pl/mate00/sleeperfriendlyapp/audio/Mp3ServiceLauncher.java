@@ -11,6 +11,7 @@ public class Mp3ServiceLauncher implements Mp3Player {
     static final String INTENT_COMMAND = "pl.sleeperfriendlyapp.audio.CMD";
     static final String INTENT_COMMAND_START = "pl.sleeperfriendlyapp.audio.START";
     static final String INTENT_COMMAND_STOP = "pl.sleeperfriendlyapp.audio.STOP";
+    static final String INTENT_TRACK_NAME = "pl.sleeperfriendlyapp.audio.TRACK";
 
     private Context context;
 
@@ -27,7 +28,10 @@ public class Mp3ServiceLauncher implements Mp3Player {
 
     @Override
     public void play(String track) {
-
+        Intent playIntent = new Intent(context, Mp3PlayerService.class);
+        playIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_START);
+        playIntent.putExtra(INTENT_TRACK_NAME, track);
+        context.startService(playIntent);
     }
 
     @Override

@@ -13,10 +13,6 @@ public class Mp3PlayerService extends Service implements MediaPlayer.OnPreparedL
 
     private static final String TAG = Mp3PlayerService.class.getSimpleName();
 
-    private static final String SDCARD_PATH = Environment.getExternalStorageDirectory().getPath();
-
-    private static final String MP3_TRACK = SDCARD_PATH + "/mp3/miami.mp3";
-
     private MediaPlayer mediaPlayer;
 
     public Mp3PlayerService() {
@@ -38,9 +34,10 @@ public class Mp3PlayerService extends Service implements MediaPlayer.OnPreparedL
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String cmd = intent.getStringExtra(Mp3ServiceLauncher.INTENT_COMMAND);
+        String track = intent.getStringExtra(Mp3ServiceLauncher.INTENT_TRACK_NAME);
 
         if (cmd.equals(Mp3ServiceLauncher.INTENT_COMMAND_START)) {
-            startPlayback();
+            startPlayback(track);
         }
 
         if (cmd.equals(Mp3ServiceLauncher.INTENT_COMMAND_STOP)) {
@@ -55,14 +52,14 @@ public class Mp3PlayerService extends Service implements MediaPlayer.OnPreparedL
         mp.start();
     }
 
-    private void startPlayback() {
+    private void startPlayback(String track) {
         if (mediaPlayer.isPlaying()) {
             return;
         }
         mediaPlayer.setOnPreparedListener(this);
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
-            mediaPlayer.setDataSource(MP3_TRACK);
+            mediaPlayer.setDataSource(track);
             mediaPlayer.prepareAsync();
             mediaPlayer.setLooping(true);
         } catch (IOException e) {
