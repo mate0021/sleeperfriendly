@@ -33,7 +33,7 @@
 
         <activity
             android:name=".ui.dialog.DialogLauncher"
-            android:excludeFromRecents="true"
+            android:excludeFromRecents="false"
             android:label="@string/title_activity_dialog_launcher"
             android:launchMode="singleInstance"
             android:noHistory="true"
