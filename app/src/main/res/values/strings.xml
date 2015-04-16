@@ -8,5 +8,6 @@
     <string name="title_activity_alarms_list">AlarmsListActivity</string>
     <string name="title_activity_set_alarm_details">SetAlarmDetails</string>
     <string name="title_activity_dialog_launcher">DialogLauncher</string>
+    <string name="title_activity_file_browser">FileBrowserActivity</string>
 
 </resources>

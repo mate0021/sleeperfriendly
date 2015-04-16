@@ -46,6 +46,10 @@
             android:exported="true" >
         </service>
 
+        <activity
+            android:name=".filebrowser.ui.FileBrowserActivity"
+            android:label="@string/title_activity_file_browser" >
+        </activity>
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +24,7 @@ import java.util.List;
 import pl.mate00.sleeperfriendlyapp.R;
 import pl.mate00.sleeperfriendlyapp.audio.shuffler.PathEntity;
 import pl.mate00.sleeperfriendlyapp.audio.db.PlaylistSelector;
+import pl.mate00.sleeperfriendlyapp.filebrowser.ui.FileBrowserActivity;
 
 public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks, AdapterView.OnItemClickListener {
 
@@ -68,6 +70,15 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
         super.onCreateContextMenu(menu, view, menuInfo);
         MenuInflater inflater = new MenuInflater(this);
         inflater.inflate(R.menu.menu_alarm_item, menu);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.menu_alarms_list, menu);
+
+        return true;
     }
 
     public void onAddAlarmClick(View view) {
@@ -130,6 +141,22 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
     public void onUpdateAfterSwitching(RepeatableAlarm alarm) {
         uiListHandler.deleteUiAlarm(alarm);
         uiListHandler.addUiAlarm(alarm);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_select_files:
+                showFileBrowser();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showFileBrowser() {
+        Intent intent = new Intent(this, FileBrowserActivity.class);
+        startActivity(intent);
     }
 
     @Override
