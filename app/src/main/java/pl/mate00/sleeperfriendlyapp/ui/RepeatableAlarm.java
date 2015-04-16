@@ -1,4 +1,4 @@
-package pl.mate00.sleeperfriendlyapp;
+package pl.mate00.sleeperfriendlyapp.ui;
 
 import org.joda.time.DateTime;
 

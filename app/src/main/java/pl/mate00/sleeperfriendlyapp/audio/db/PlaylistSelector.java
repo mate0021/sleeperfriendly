@@ -1,4 +1,4 @@
-package pl.mate00.sleeperfriendlyapp.db;
+package pl.mate00.sleeperfriendlyapp.audio.db;
 
 import android.content.ContentValues;
 import android.content.Context;

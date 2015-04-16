@@ -10,7 +10,6 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Alarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Time;
 import pl.mate00.sleeperfriendlyapp.timeline.Timeline;

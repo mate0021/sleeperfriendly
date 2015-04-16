@@ -12,7 +12,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import pl.mate00.sleeperfriendlyapp.R;
-import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
 
 /**
  * Created by mamy on 10.02.15.

@@ -8,7 +8,7 @@ import pl.mate00.sleeperfriendlyapp.R;
 import pl.mate00.sleeperfriendlyapp.audio.Mp3Player;
 import pl.mate00.sleeperfriendlyapp.audio.Mp3ServiceLauncher;
 import pl.mate00.sleeperfriendlyapp.audio.shuffler.Mp3Shuffler;
-import pl.mate00.sleeperfriendlyapp.db.PlaylistSelector;
+import pl.mate00.sleeperfriendlyapp.audio.db.PlaylistSelector;
 import pl.mate00.sleeperfriendlyapp.ui.AlarmReactionListener;
 
 import static android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
@@ -16,10 +16,6 @@ import static android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
 public class DialogLauncher extends FragmentActivity implements AlarmReactionListener {
 
     private static final String TAG = DialogLauncher.class.getSimpleName();
-
-    private static final String SDCARD_PATH = Environment.getExternalStorageDirectory().getPath();
-
-    private static final String MP3_TRACK = SDCARD_PATH + "/mp3/miami.mp3";
 
     private Mp3Player player = new Mp3ServiceLauncher(this);
 

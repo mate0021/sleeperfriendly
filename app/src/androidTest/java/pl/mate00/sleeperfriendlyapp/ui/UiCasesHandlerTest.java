@@ -13,7 +13,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlarmManager;
 import org.robolectric.shadows.ShadowAlarmManager.ScheduledAlarm;
 
-import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Time;
 
 import static org.joda.time.DateTimeConstants.FRIDAY;

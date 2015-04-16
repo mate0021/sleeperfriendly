@@ -21,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.mate00.sleeperfriendlyapp.R;
-import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
+import pl.mate00.sleeperfriendlyapp.audio.shuffler.PathEntity;
+import pl.mate00.sleeperfriendlyapp.audio.db.PlaylistSelector;
 
 public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks, AdapterView.OnItemClickListener {
 
@@ -139,6 +140,19 @@ public class AlarmsListActivity extends ActionBarActivity implements UiCallbacks
         DateTime current = new DateTime();
         uiCasesHandler.setAlarmEnabledTo(isEnabled, alarm, current);
         cbIsEnabled.setChecked(isEnabled);
+    }
+
+    private void resetPaths() {
+        PlaylistSelector selector = new PlaylistSelector(this);
+        selector.insertPath(new PathEntity("/sdcard/mp3/accid.mp3", false));
+        selector.insertPath(new PathEntity("/sdcard/mp3/dinner.mp3", false));
+        selector.insertPath(new PathEntity("/sdcard/mp3/f3.mp3", false));
+        selector.insertPath(new PathEntity("/sdcard/mp3/funk.mp3", false));
+        selector.insertPath(new PathEntity("/sdcard/mp3/ktowie.mp3", false));
+        selector.insertPath(new PathEntity("/sdcard/mp3/kuchwa.mp3", false));
+        selector.insertPath(new PathEntity("/sdcard/mp3/miami.mp3", false));
+        selector.insertPath(new PathEntity("/sdcard/mp3/monster.mp3", false));
+        selector.insertPath(new PathEntity("/sdcard/mp3/spies.mp3", false));
     }
 
 }
