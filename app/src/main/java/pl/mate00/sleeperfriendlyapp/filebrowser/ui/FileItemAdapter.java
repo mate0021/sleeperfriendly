@@ -33,9 +33,7 @@ public class FileItemAdapter extends ArrayAdapter<SelectableItem> {
         FileItemHolder holder;
 
         if (row == null) {
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-            row = inflater.inflate(rowLayoutResourceId, parent, false);
-
+            row = View.inflate(context, rowLayoutResourceId, null);
             holder = new FileItemHolder();
             holder.cbIsSelected = (CheckBox) row.findViewById(R.id.is_file_selected);
             holder.txtFileName = (TextView) row.findViewById(R.id.txt_file_name);
