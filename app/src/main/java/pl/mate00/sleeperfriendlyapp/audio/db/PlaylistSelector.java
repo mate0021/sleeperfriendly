@@ -32,13 +32,19 @@ public class PlaylistSelector implements IPlaylistSelector {
     }
 
     public void insertPath(PathEntity path) {
-
         db = dbHandler.getWritableDatabase();
         ContentValues value = new ContentValues();
         value.put(COLUMN_PATH, path.getPath());
         value.put(COLUMN_PLAYED, playedToCode(path.isPlayed()));
         db.insert(TABLE_NAME, null, value);
 
+        db.close();
+        dbHandler.close();
+    }
+
+    public void removePath(PathEntity path) {
+        db = dbHandler.getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_PATH + " = ? ", new String[]{ path.getPath() });
         db.close();
         dbHandler.close();
     }

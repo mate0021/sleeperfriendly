@@ -1,7 +1,5 @@
 package pl.mate00.sleeperfriendlyapp.filebrowser;
 
-import pl.mate00.sleeperfriendlyapp.filebrowser.SelectableItem;
-
 public class DirectoryItem extends SelectableItem {
 
     public DirectoryItem(String fileName) {
@@ -9,7 +7,9 @@ public class DirectoryItem extends SelectableItem {
     }
 
     @Override
-    public void onTap() {}
+    public void onTap() {
+        System.out.println("will enter directory " + getFileName());
+    }
 
     @Override
     public boolean isSelectedVisible() {

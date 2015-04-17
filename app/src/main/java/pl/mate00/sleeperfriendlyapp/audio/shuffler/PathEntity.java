@@ -6,6 +6,10 @@ public class PathEntity {
 
     private boolean played;
 
+    public PathEntity(String path) {
+        this(path, false);
+    }
+
     public PathEntity(String path, boolean played) {
         this.path = path;
         this.played = played;
