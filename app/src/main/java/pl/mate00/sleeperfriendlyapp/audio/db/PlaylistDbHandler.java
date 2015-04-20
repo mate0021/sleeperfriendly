@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.COLUMN_ID;
 import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.COLUMN_PATH;
 import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.COLUMN_PLAYED;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.COLUMN_TRACK;
 import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.DB_FILE_TRACKS;
 import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.TABLE_NAME;
 
@@ -19,6 +20,7 @@ public class PlaylistDbHandler extends SQLiteOpenHelper {
     private static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + "(" +
             COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_PATH + " TEXT NOT NULL, " +
+            COLUMN_TRACK + " TEXT NOT NULL, " +
             COLUMN_PLAYED + " INTEGER NOT NULL " +
             ");";
 

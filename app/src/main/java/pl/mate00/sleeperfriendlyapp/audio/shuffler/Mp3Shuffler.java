@@ -21,7 +21,8 @@ public class Mp3Shuffler {
         if (allPaths.isEmpty()) {
 			return EMPTY;
 		} else {
-			return getRandomFromAllPlayed(allPaths);
+			Mp3Location mp3Location = getRandomFromAllPlayed(allPaths);
+            return mp3Location.getFullPath();
 		}
 	}
 	
@@ -36,7 +37,7 @@ public class Mp3Shuffler {
 		return result;
 	}
 	
-	private String getRandomFromAllPlayed(List<PathEntity> allPaths) {
+	private Mp3Location getRandomFromAllPlayed(List<PathEntity> allPaths) {
         List<PathEntity> filtered = filterUnplayedFrom(allPaths);
 		if (filtered.isEmpty()) {
             for (PathEntity p : allPaths) {
@@ -49,7 +50,7 @@ public class Mp3Shuffler {
 			PathEntity randomPath = filtered.get(0);
 			randomPath.setPlayed(true);
 			selector.updateWithPath(randomPath);
-			return randomPath.getPath();
+			return randomPath.getMp3Location();
 		}
 	}
 }

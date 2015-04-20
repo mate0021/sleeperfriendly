@@ -11,10 +11,10 @@ public class NoneUnplayedSelector implements IPlaylistSelector {
 	public List<PathEntity> getAll() {
 		List<PathEntity> result = new ArrayList<PathEntity>();
 		
-		result.add(new PathEntity("path1", true));
-		result.add(new PathEntity("path2", true));
-		result.add(new PathEntity("path3", true));
-        result.add(new PathEntity("path4", true));
+		result.add(new PathEntity(new Mp3Location("", "path1"), true));
+		result.add(new PathEntity(new Mp3Location("", "path2"), true));
+		result.add(new PathEntity(new Mp3Location("", "path3"), true));
+        result.add(new PathEntity(new Mp3Location("", "path4"), true));
 		
 		return result;
 	}

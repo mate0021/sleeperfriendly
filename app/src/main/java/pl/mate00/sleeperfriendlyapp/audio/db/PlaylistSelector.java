@@ -6,13 +6,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import pl.mate00.sleeperfriendlyapp.audio.shuffler.IPlaylistSelector;
+import pl.mate00.sleeperfriendlyapp.audio.shuffler.Mp3Location;
 import pl.mate00.sleeperfriendlyapp.audio.shuffler.PathEntity;
 
 import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.COLUMN_PATH;
 import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.COLUMN_PLAYED;
+import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.COLUMN_TRACK;
 import static pl.mate00.sleeperfriendlyapp.db.DbConstants.TrackPath.TABLE_NAME;
 
 public class PlaylistSelector implements IPlaylistSelector {
@@ -34,7 +37,8 @@ public class PlaylistSelector implements IPlaylistSelector {
     public void insertPath(PathEntity path) {
         db = dbHandler.getWritableDatabase();
         ContentValues value = new ContentValues();
-        value.put(COLUMN_PATH, path.getPath());
+        value.put(COLUMN_PATH, path.getMp3Location().getPath());
+        value.put(COLUMN_TRACK, path.getMp3Location().getTrack());
         value.put(COLUMN_PLAYED, playedToCode(path.isPlayed()));
         db.insert(TABLE_NAME, null, value);
 
@@ -44,24 +48,31 @@ public class PlaylistSelector implements IPlaylistSelector {
 
     public void removePath(PathEntity path) {
         db = dbHandler.getWritableDatabase();
-        db.delete(TABLE_NAME, COLUMN_PATH + " = ? ", new String[]{ path.getPath() });
+        db.delete(TABLE_NAME, COLUMN_PATH + " = ? AND " + COLUMN_TRACK + " = ? ",
+                new String[]{ path.getMp3Location().getPath(), path.getMp3Location().getTrack() });
         db.close();
         dbHandler.close();
+    }
+
+    public List<PathEntity> getTracksForDirectory(String directory) {
+        return Collections.EMPTY_LIST;
     }
     
     @Override
     public List<PathEntity> getAll() {
     	db = dbHandler.getReadableDatabase();
 
-        String[] columns = new String[] { COLUMN_PATH, COLUMN_PLAYED };
+        String[] columns = new String[] { COLUMN_PATH, COLUMN_TRACK, COLUMN_PLAYED };
 
         Cursor c = db.query(TABLE_NAME, columns, null, null, null, null, null);
 
         List<PathEntity> result = new ArrayList<PathEntity>();
         while (c.moveToNext()) {
             String path = c.getString(c.getColumnIndex(COLUMN_PATH));
+            String track = c.getString(c.getColumnIndex(COLUMN_TRACK));
             int code = c.getInt(c.getColumnIndex(COLUMN_PLAYED));
-			result.add(new PathEntity(path, wasPlayed(code)));
+
+			result.add(new PathEntity(new Mp3Location(path, track), wasPlayed(code)));
         }
         c.close();
 
@@ -78,7 +89,8 @@ public class PlaylistSelector implements IPlaylistSelector {
 		ContentValues values = new ContentValues();
 		values.put(COLUMN_PLAYED, playedToCode(path.isPlayed()));
 
-		db.update(TABLE_NAME, values, COLUMN_PATH + " = ?", new String[] { path.getPath() });
+		db.update(TABLE_NAME, values, COLUMN_PATH + " = ? AND " + COLUMN_TRACK + " = ? ",
+                new String[] { path.getMp3Location().getPath(), path.getMp3Location().getTrack() });
 
 		db.close();
 		dbHandler.close();

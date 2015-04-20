@@ -36,26 +36,13 @@ public class FileBrowserActivity extends ActionBarActivity implements AdapterVie
         setContentView(R.layout.activity_file_browser);
 
         listView = (ListView) findViewById(R.id.list_file_items);
-        adapter = new FileItemAdapter(this, R.layout.file_browser_row, getItems());
+        handler = new FileBrowserUiHandler(this, this);
+        items = handler.getItemsForDirectory("");
+        adapter = new FileItemAdapter(this, R.layout.file_browser_row, items);
         listView.setAdapter(adapter);
         listView.setClickable(true);
         listView.setOnItemClickListener(this);
-
-        handler = new FileBrowserUiHandler(this);
-        handler.setFileBrowserCallback(this);
     }
-
-    private List<SelectableItem> getItems() {
-        SelectableItem i1 = new DirectoryItem("/dir1/");
-        SelectableItem i2 = new DirectoryItem("/dir2/");
-        SelectableItem i3 = new FileItem("file1.mp3", false);
-        SelectableItem i4 = new FileItem("file2.mp3", false);
-        SelectableItem i5 = new FileItem("file3.mp3", false);
-        SelectableItem i6 = new FileItem("file4.mp3", false);
-
-        return Arrays.asList(i1, i2, i3, i4, i5, i6);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,13 +73,20 @@ public class FileBrowserActivity extends ActionBarActivity implements AdapterVie
     @Override
     public void onFileAdded() {
         System.out.println("yes, file was added");
+        updateUiFileListForDirectory("");
     }
 
     @Override
     public void onFileRemoved() {
         System.out.println("yes, file was removed");
+        updateUiFileListForDirectory("");
     }
 
     @Override
     public void onDirectoryChanged() {}
+
+    private void updateUiFileListForDirectory(String directory) {
+        items = handler.getItemsForDirectory(directory);
+        adapter.notifyDataSetChanged();
+    }
 }

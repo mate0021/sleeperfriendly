@@ -9,6 +9,8 @@ public abstract class SelectableItem {
 
     private boolean isSelected;
 
+    private String path;
+
     private String fileName;
 
     protected Context context;
@@ -30,6 +32,14 @@ public abstract class SelectableItem {
 
     public void setSelected(boolean isSelected) {
         this.isSelected = isSelected;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getPath() {
+        return path;
     }
 
     public String getFileName() {

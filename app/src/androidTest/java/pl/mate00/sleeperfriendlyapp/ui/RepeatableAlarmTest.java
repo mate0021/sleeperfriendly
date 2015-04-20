@@ -1,4 +1,4 @@
-package pl.mate00.sleeperfriendlyapp.audio.shuffler;
+package pl.mate00.sleeperfriendlyapp.ui;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.mate00.sleeperfriendlyapp.ui.RepeatableAlarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Alarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Time;
 

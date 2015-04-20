@@ -11,10 +11,10 @@ public class AllUnplayedSelector implements IPlaylistSelector {
 	public List<PathEntity> getAll() {
 		List<PathEntity> result = new ArrayList<PathEntity>();
 		
-		result.add(new PathEntity("path1", false));
-		result.add(new PathEntity("path2", false));
-		result.add(new PathEntity("path3", false));
-        result.add(new PathEntity("path4", false));
+		result.add(new PathEntity(new Mp3Location("", "path1"), false));
+		result.add(new PathEntity(new Mp3Location("", "path2"), false));
+		result.add(new PathEntity(new Mp3Location("", "path3"), false));
+        result.add(new PathEntity(new Mp3Location("", "path4"), false));
 		
 		return result;
 	}

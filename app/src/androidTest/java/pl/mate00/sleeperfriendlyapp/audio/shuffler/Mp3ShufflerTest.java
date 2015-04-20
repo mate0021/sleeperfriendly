@@ -38,8 +38,8 @@ public class Mp3ShufflerTest {
     	subject.setSelector(new SomeUnplayedSelector());
 
     	String result = subject.getNext();
-        assertTrue(result.equals("path1") || result.equals("path3") || result.equals("path4"));
-    	assertFalse(result.equals("path2"));
+        assertTrue(result.equals("path1/track1") || result.equals("path3/track3") || result.equals("path4/track4"));
+    	assertFalse(result.equals("path2/track2"));
     }
 
     @Test

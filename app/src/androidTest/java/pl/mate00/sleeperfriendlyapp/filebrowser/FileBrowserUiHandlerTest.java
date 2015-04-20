@@ -18,7 +18,7 @@ public class FileBrowserUiHandlerTest {
 
     @Before
     public void setUp() {
-        subject = new FileBrowserUiHandler(Robolectric.application);
+//        subject = new FileBrowserUiHandler(Robolectric.application);
     }
 
     @Test

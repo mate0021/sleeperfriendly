@@ -38,6 +38,7 @@ public final class DbConstants {
         public static final String TABLE_NAME = "played_mp3";
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_PATH = "path";
+        public static final String COLUMN_TRACK = "track";
         public static final String COLUMN_PLAYED = "played";
     }
 }
