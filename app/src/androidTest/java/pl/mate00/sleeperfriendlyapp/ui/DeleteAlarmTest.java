@@ -9,22 +9,25 @@ import android.widget.ListView;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.tester.android.view.TestMenuItem;
+import org.robolectric.fakes.RoboMenu;
+import org.robolectric.fakes.RoboMenuItem;
 
+import pl.mate00.sleeperfriendlyapp.BuildConfig;
 import pl.mate00.sleeperfriendlyapp.R;
 
 import static android.app.Activity.RESULT_OK;
 import static org.junit.Assert.assertEquals;
 import static org.robolectric.Robolectric.buildActivity;
-import static org.robolectric.Robolectric.shadowOf;
+import static org.robolectric.Shadows.shadowOf;
 
 /**
  * Created by mamy on 25.02.15.
  */
-@RunWith(RobolectricTestRunner.class)
-@Config(emulateSdk = 18, reportSdk = 18)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class DeleteAlarmTest {
 
     private AlarmsListActivity alarmsListActivity;
@@ -59,7 +62,7 @@ public class DeleteAlarmTest {
     }
 
     private MenuItem getClickedMenuItem(final View view) {
-        MenuItem result = new TestMenuItem() {
+        MenuItem result = new RoboMenuItem() {
 
             public int getItemId() {
                 return R.id.menu_item_delete_alarm;

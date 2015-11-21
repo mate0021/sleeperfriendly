@@ -8,11 +8,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlarmManager;
 import org.robolectric.shadows.ShadowAlarmManager.ScheduledAlarm;
 
+import pl.mate00.sleeperfriendlyapp.BuildConfig;
 import pl.mate00.sleeperfriendlyapp.RepeatableAlarm;
 import pl.mate00.sleeperfriendlyapp.timeline.Time;
 
@@ -31,14 +34,15 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.robolectric.Shadows.shadowOf;
 
-@RunWith(RobolectricTestRunner.class)
-@Config(emulateSdk = 18, reportSdk = 18)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class UiCasesHandlerTest {
 
     private UiCasesHandler subject;
 
-    private Context context = Robolectric.application;
+    private Context context = RuntimeEnvironment.application;
 
     private DateTime currentWednesday10Am;
 
@@ -52,8 +56,8 @@ public class UiCasesHandlerTest {
     public void setUp() {
         subject = new UiCasesHandler(context);
         currentWednesday10Am = new DateTime().withDayOfWeek(WEDNESDAY).withTime(10, 0, 0, 0);
-        alarmManager = (AlarmManager) Robolectric.application.getSystemService(Context.ALARM_SERVICE);
-        shadowAlarmManager = Robolectric.shadowOf(alarmManager);
+        alarmManager = (AlarmManager) RuntimeEnvironment.application.getSystemService(Context.ALARM_SERVICE);
+        shadowAlarmManager = shadowOf(alarmManager);
         uiListenerMock = mock(UiCallbacks.class);
         subject.setUiListener(uiListenerMock);
     }

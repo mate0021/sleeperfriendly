@@ -10,9 +10,10 @@ import android.widget.TextView;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
+import pl.mate00.sleeperfriendlyapp.BuildConfig;
 import pl.mate00.sleeperfriendlyapp.R;
 
 import static android.app.Activity.RESULT_CANCELED;
@@ -22,14 +23,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.robolectric.Robolectric.buildActivity;
-import static org.robolectric.Robolectric.shadowOf;
+import static org.robolectric.Shadows.shadowOf;
 
 
 /**
  * Created by mamy on 19.02.15.
  */
-@RunWith(RobolectricTestRunner.class)
-@Config(emulateSdk = 18, reportSdk = 18)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class AddAlarmTest {
 
     private AlarmsListActivity alarmsListActivity;
