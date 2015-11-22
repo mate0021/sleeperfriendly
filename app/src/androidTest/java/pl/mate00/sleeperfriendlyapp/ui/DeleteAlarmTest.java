@@ -10,9 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.fakes.RoboMenu;
 import org.robolectric.fakes.RoboMenuItem;
 
 import pl.mate00.sleeperfriendlyapp.BuildConfig;
