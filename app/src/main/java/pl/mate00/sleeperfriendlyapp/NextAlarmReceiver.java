@@ -46,6 +46,7 @@ public class NextAlarmReceiver extends BroadcastReceiver {
     private void updateWithNextAlarm(DateTime current) {
         Timeline timeline = new TimelineDb(context);
         Optional<Alarm> nextAlarm = timeline.getClosestTo(current);
+        Log.d(TAG, " [][][] Optional next " + nextAlarm);
         if (nextAlarm.isPresent()) {
             AlarmManagerMobile alarmManager = new AlarmManagerMobile(context);
             alarmManager.updateWithClosestAlarm(nextAlarm.get());

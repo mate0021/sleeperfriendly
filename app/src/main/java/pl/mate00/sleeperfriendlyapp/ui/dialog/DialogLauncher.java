@@ -3,6 +3,7 @@ package pl.mate00.sleeperfriendlyapp.ui.dialog;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import pl.mate00.sleeperfriendlyapp.R;
 import pl.mate00.sleeperfriendlyapp.audio.Mp3Player;
@@ -27,6 +28,9 @@ public class DialogLauncher extends FragmentActivity implements AlarmReactionLis
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(TAG, " [][][] showing DialogLauncher");
+
         setContentView(R.layout.activity_dialog_launcher);
         getWindow().addFlags(FLAG_SHOW_WHEN_LOCKED);
         DisplayAlarmDialogFragment alarmDialog = new DisplayAlarmDialogFragment();

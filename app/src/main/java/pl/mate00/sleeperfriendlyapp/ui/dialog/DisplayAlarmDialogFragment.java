@@ -30,7 +30,7 @@ public class DisplayAlarmDialogFragment extends DialogFragment {
     private DialogInterface.OnClickListener positiveClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            Log.d(TAG, "positive click");
+            Log.d(TAG, " [][][] positive click");
             listener.onTerminateAlarm();
         }
     };
@@ -38,7 +38,7 @@ public class DisplayAlarmDialogFragment extends DialogFragment {
     private DialogInterface.OnClickListener negativeClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            Log.d(TAG, "negative click");
+            Log.d(TAG, " [][][] negative click");
             listener.onContinueAlarm();
         }
     };
