@@ -54,7 +54,6 @@ dependencies {
     compile 'joda-time:joda-time:2.3'
     compile 'com.google.guava:guava:12.0'
 
-    testCompile 'junit:junit:4.+'
     testCompile 'org.robolectric:robolectric:3.+'
     testCompile 'org.mockito:mockito-all:1.10.+'
     testCompile 'junit:junit:4.12'

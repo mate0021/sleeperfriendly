@@ -3,15 +3,16 @@ package pl.mate00.sleeperfriendlyapp.filebrowser;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
+
+import pl.mate00.sleeperfriendlyapp.BuildConfig;
 
 /**
  * Created by mamy on 17.04.15.
  */
-@RunWith(RobolectricTestRunner.class)
-@Config(emulateSdk = 18, reportSdk = 18)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class FileBrowserUiHandlerTest {
 
     private FileBrowserUiHandler subject;

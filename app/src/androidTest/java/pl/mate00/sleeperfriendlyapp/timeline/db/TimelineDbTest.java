@@ -6,19 +6,22 @@ import android.database.sqlite.SQLiteException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import pl.mate00.sleeperfriendlyapp.BuildConfig;
 import pl.mate00.sleeperfriendlyapp.timeline.AbstractTimelineSuite;
 import pl.mate00.sleeperfriendlyapp.timeline.Timeline;
 
 import static junit.framework.Assert.assertEquals;
 
-@Config(emulateSdk = 18)
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class TimelineDbTest extends AbstractTimelineSuite {
 
-    private Context context = Robolectric.application;
+    private Context context = RuntimeEnvironment.application;
 
     @Override
     public Timeline getTimelineInstance() {
